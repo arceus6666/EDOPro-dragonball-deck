@@ -6,11 +6,13 @@ local s, id = GetID()
 function s.initial_effect(c)
   --Fusion summon 1 fiend fusion monster
   --Using monsters from hand or field as material
-  c:RegisterEffect(Fusion.CreateSummonEff({
+  local e1 = Fusion.CreateSummonEff({
     handler = c,
     fusfilter = aux.FilterBoolFunction(Card.IsSetCard, ARCHETYPES.SAIYAN),
     stage2 = s.stage2
-  }))
+  })
+  e1:SetCountLimit(1, id, EFFECT_COUNT_CODE_OATH)
+  c:RegisterEffect(e1)
 end
 
 function s.stage2(e, tc, tp, sg, chk)
