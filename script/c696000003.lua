@@ -6,11 +6,15 @@ local s, id = GetID()
 function s.initial_effect(c)
   --Fusion summon 1 fiend fusion monster
   --Using monsters from hand or field as material
+  Debug.Message(ARCHETYPES.SAIYAN)
+  Debug.Message(aux.FilterBoolFunction(Card.ISSetCard, ARCHETYPES.SAIYAN))
   c:RegisterEffect(Fusion.CreateSummonEff({
     handler = c,
     fusfilter = aux.FilterBoolFunction(Card.ISSetCard, ARCHETYPES.SAIYAN),
     stage2 = s.stage2
   }))
+  -- Card.IsSetCard(Card c, int setname[, Card scard|nil, int sumtype = 0, int playerid = PLAYER_NONE])
+  -- Card.IsRace   (Card c, int race[, Card scard|nil, int sumtype = 0, int playerid = PLAYER_NONE])
 end
 
 function s.stage2(e, tc, tp, sg, chk)
