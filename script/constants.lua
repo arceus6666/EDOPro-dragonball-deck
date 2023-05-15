@@ -1,0 +1,12 @@
+ARCHETYPES = {
+  SAIYAN = 0x6E6E
+}
+
+SAIYAN = {
+  XENO_VEGETA,
+  XENO_GOKU
+}
+
+TOKENS = {
+  
+}
