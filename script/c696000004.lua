@@ -7,7 +7,7 @@ function s.initial_effect(c)
   c:EnableReviveLimit()
 
   --Fusion materials
-  Fusion.AddProcMix(c, true, true, SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU)
+  Fusion.AddProcMix(c, false, false, SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU)
 
   --special summon
   local e1 = Effect.CreateEffect(c)
@@ -33,17 +33,21 @@ function s.filter(c, e, tp)
       c:IsCanBeSpecialSummoned(e, 0, tp, false, false, POS_FACEUP)
 end
 
-
 -- Card.IsCanBeSpecialSummoned(Card c, Effect e, int sumtype, int sumplayer, bool nocheck, bool nolimit[, int sumpos=POS_FACEUP, int target_player=sumplayer])
 
 function s.target(e, tp, eg, ep, ev, re, r, rp, chk)
+  -- if chk == 0 then
+  --   if Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_SPIRIT) then return false end
+  --   if Duel.GetLocationCount(tp, LOCATION_MZONE) < 2 then return false end
+  --   local g = Duel.GetMatchingGroup(s.filter, tp, LOCATION_GRAVE, 0, nil, e, tp)
+  --   return g:GetClassCount(Card.GetCode) >= 2
+  -- end
   if chk == 0 then
-    if Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_SPIRIT) then return false end
-    if Duel.GetLocationCount(tp, LOCATION_MZONE) < 2 then return false end
-    -- local g = Duel.GetMatchingGroup(s.filter, tp, LOCATION_GRAVE, 0, nil, e, tp)
-    -- return g:GetClassCount(Card.GetCode) >= 2
-    local g = Duel.SelectMatchingCard(tp, s.filter, tp, LOCATION_GRAVE, 0, 2, 2, false, e)
-    Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,2,0,0)
+    return
+        not Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_SPIRIT)
+        and Duel.GetLocationCount(tp, LOCATION_MZONE) > 2
+        and Duel.IsExistingMatchingCard(s.spfilter, tp, LOCATION_HAND + LOCATION_DECK, 0, 1, nil, e, tp, SAIYAN.XENO_VEGETA)
+        and Duel.IsExistingMatchingCard(s.spfilter, tp, LOCATION_HAND + LOCATION_DECK, 0, 1, nil, e, tp, SAIYAN.XENO_GOKU)
   end
   Duel.SetOperationInfo(0, CATEGORY_SPECIAL_SUMMON, nil, 2, tp, LOCATION_GRAVE)
 end
