@@ -23,17 +23,16 @@ function s.initial_effect(c)
 end
 
 s.listed_names = { SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU }
+s.material_setcode = ARCHETYPES.SAIYAN
 
 function s.condition(e, tp, eg, ep, ev, re, r, rp)
   return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 
-function s.filter(c, e, tp)
-  return (c:IsCode(SAIYAN.XENO_VEGETA) or c:IsCode(SAIYAN.XENO_GOKU)) and
-      c:IsCanBeSpecialSummoned(e, 0, tp, false, false, POS_FACEUP)
+function s.filter(c, e, tp, code)
+  return c:IsCode(code)
+      and c:IsCanBeSpecialSummoned(e, 0, tp, false, false, POS_FACEUP)
 end
-
--- Card.IsCanBeSpecialSummoned(Card c, Effect e, int sumtype, int sumplayer, bool nocheck, bool nolimit[, int sumpos=POS_FACEUP, int target_player=sumplayer])
 
 function s.target(e, tp, eg, ep, ev, re, r, rp, chk)
   -- if chk == 0 then
@@ -46,8 +45,10 @@ function s.target(e, tp, eg, ep, ev, re, r, rp, chk)
     return
         not Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_SPIRIT)
         and Duel.GetLocationCount(tp, LOCATION_MZONE) > 2
-        and Duel.IsExistingMatchingCard(s.spfilter, tp, LOCATION_HAND + LOCATION_DECK, 0, 1, nil, e, tp, SAIYAN.XENO_VEGETA)
-        and Duel.IsExistingMatchingCard(s.spfilter, tp, LOCATION_HAND + LOCATION_DECK, 0, 1, nil, e, tp, SAIYAN.XENO_GOKU)
+        and Duel.IsExistingMatchingCard(s.filter, tp, LOCATION_GRAVE, 0, 1, nil, e, tp,
+          SAIYAN.XENO_VEGETA)
+        and Duel.IsExistingMatchingCard(s.filter, tp, LOCATION_GRAVE, 0, 1, nil, e, tp, SAIYAN
+          .XENO_GOKU)
   end
   Duel.SetOperationInfo(0, CATEGORY_SPECIAL_SUMMON, nil, 2, tp, LOCATION_GRAVE)
 end
@@ -57,12 +58,23 @@ function s.operation(e, tp, eg, ep, ev, re, r, rp)
 
   -- Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
 
-  local g = Duel.GetMatchingGroup(s.filter, tp, LOCATION_GRAVE, 0, nil, e, tp)
+  -- local g = Duel.GetMatchingGroup(s.filter, tp, LOCATION_GRAVE, 0, nil, e, tp)
+  local g1 = Duel.GetMatchingGroup(s.filter, tp, LOCATION_GRAVE, 0, nil, e, tp, SAIYAN.XENO_VEGETA)
+  local g2 = Duel.GetMatchingGroup(s.filter, tp, LOCATION_GRAVE, 0, nil, e, tp, SAIYAN.XENO_GOKU)
 
-  if #g == 0 then return end
+  -- if #g == 0 then return end
 
-  local sg = aux.SelectUnselectGroup(g, e, tp, 2, 2, aux.dncheck, 1, tp, HINTMSG_SPSUMMON)
-  if #sg > 0 then
-    Duel.SpecialSummon(g, 0, tp, tp, false, false, POS_FACEUP)
+  -- local sg = aux.SelectUnselectGroup(g, e, tp, 2, 2, aux.dncheck, 1, tp, HINTMSG_SPSUMMON)
+  -- if #sg > 0 then
+  --   Duel.SpecialSummon(g, 0, tp, tp, false, false, POS_FACEUP)
+  -- end
+
+  if #g1 > 0 and #g2 > 0 then
+    Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
+    local sg1 = g1:Select(tp, 1, 1, nil)
+    Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
+    local sg2 = g2:Select(tp, 1, 1, nil)
+    sg1:Merge(sg2)
+    Duel.SpecialSummon(sg1, 0, tp, tp, true, false, POS_FACEUP)
   end
 end
