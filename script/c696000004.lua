@@ -29,9 +29,12 @@ function s.condition(e, tp, eg, ep, ev, re, r, rp)
 end
 
 function s.filter(c, e, tp)
-  return (c:IsCode(SAIYAN) or c:IsCode(SAIYAN.XENO_GOKU)) and
+  return (c:IsCode(SAIYAN.XENO_VEGETA) or c:IsCode(SAIYAN.XENO_GOKU)) and
       c:IsCanBeSpecialSummoned(e, 0, tp, false, false, POS_FACEUP)
 end
+
+
+-- Card.IsCanBeSpecialSummoned(Card c, Effect e, int sumtype, int sumplayer, bool nocheck, bool nolimit[, int sumpos=POS_FACEUP, int target_player=sumplayer])
 
 function s.target(e, tp, eg, ep, ev, re, r, rp, chk)
   if chk == 0 then
@@ -39,7 +42,8 @@ function s.target(e, tp, eg, ep, ev, re, r, rp, chk)
     if Duel.GetLocationCount(tp, LOCATION_MZONE) < 2 then return false end
     -- local g = Duel.GetMatchingGroup(s.filter, tp, LOCATION_GRAVE, 0, nil, e, tp)
     -- return g:GetClassCount(Card.GetCode) >= 2
-    local g = Duel.SelectTarget(tp, s.filter, tp, LOCATION_GRAVE, 0, 2, 2, nil)
+    local g = Duel.SelectMatchingCard(tp, s.filter, tp, LOCATION_GRAVE, 0, 2, 2, false, e)
+    Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,2,0,0)
   end
   Duel.SetOperationInfo(0, CATEGORY_SPECIAL_SUMMON, nil, 2, tp, LOCATION_GRAVE)
 end
