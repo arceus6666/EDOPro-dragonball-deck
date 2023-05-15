@@ -8,7 +8,7 @@ function s.initial_effect(c)
   --Using monsters from hand or field as material
   c:RegisterEffect(Fusion.CreateSummonEff({
     handler = c,
-    fusfilter = aux.FilterBoolFunction(Card.IsRace, ARCHETYPES.SAIYAN),
+    fusfilter = aux.FilterBoolFunction(Card.ISSetCard, ARCHETYPES.SAIYAN),
     stage2 = s.stage2
   }))
 end
