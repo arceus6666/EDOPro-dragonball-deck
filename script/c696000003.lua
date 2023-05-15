@@ -6,8 +6,9 @@ local s, id = GetID()
 function s.initial_effect(c)
   --Fusion summon 1 fiend fusion monster
   --Using monsters from hand or field as material
+  local b = aux.FilterBoolFunction(Card.ISSetCard, ARCHETYPES.SAIYAN)
   Debug.Message(ARCHETYPES.SAIYAN)
-  Debug.Message(aux.FilterBoolFunction(Card.ISSetCard, ARCHETYPES.SAIYAN))
+  Debug.Message(b)
   c:RegisterEffect(Fusion.CreateSummonEff({
     handler = c,
     fusfilter = aux.FilterBoolFunction(Card.ISSetCard, ARCHETYPES.SAIYAN),
