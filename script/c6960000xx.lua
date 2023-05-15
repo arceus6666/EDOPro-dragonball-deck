@@ -1,4 +1,4 @@
--- aile model x
+-- 
 
 Duel.LoadScript("functions.lua")
 local s, id = GetID()
