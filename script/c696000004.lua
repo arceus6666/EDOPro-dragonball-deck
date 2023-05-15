@@ -37,7 +37,7 @@ function s.target(e, tp, eg, ep, ev, re, r, rp, chk)
   if chk == 0 then
     if Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_SPIRIT) then return false end
     if Duel.GetLocationCount(tp, LOCATION_MZONE) < 2 then return false end
-    local g = Duel.IsExistingMatchingCard(s.filter, tp, LOCATION_GRAVE, 0, nil, e, tp)
+    local g = Duel.GetMatchingGroup(s.filter, tp, LOCATION_GRAVE, 0, nil, e, tp)
     return g:GetClassCount(Card.GetCode) >= 2
   end
   Duel.SetOperationInfo(0, CATEGORY_SPECIAL_SUMMON, nil, 2, tp, LOCATION_GRAVE)
