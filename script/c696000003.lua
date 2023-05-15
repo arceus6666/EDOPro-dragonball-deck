@@ -11,7 +11,7 @@ function s.initial_effect(c)
   Debug.Message(b)
   c:RegisterEffect(Fusion.CreateSummonEff({
     handler = c,
-    fusfilter = aux.FilterBoolFunction(Card.ISSetCard, ARCHETYPES.SAIYAN),
+    fusfilter = aux.FilterBoolFunction(Card.IsSetCard, ARCHETYPES.SAIYAN),
     stage2 = s.stage2
   }))
   -- Card.IsSetCard(Card c, int setname[, Card scard|nil, int sumtype = 0, int playerid = PLAYER_NONE])
