@@ -18,8 +18,8 @@ function FusionProc(c, ...)
   Fusion.AddProcMix(c, true, true, ...)
 end
 
-function Fsodfilter(c, e, tp, code)
-  return c:IsCode(code)
+function Fsodfilter(c, e, tp, cd)
+  return c:IsCode(cd)
       and c:IsCanBeSpecialSummoned(e, 0, tp, false, false, POS_FACEUP)
 end
 
