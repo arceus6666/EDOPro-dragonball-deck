@@ -23,7 +23,7 @@ function Fsodfilter(c, e, tp, code)
       and c:IsCanBeSpecialSummoned(e, 0, tp, false, false, POS_FACEUP)
 end
 
-function FusionDanceSpSummon(c)
+function Card.FusionDanceSpSummon(c)
   local e = Effect.CreateEffect(c)
   e:SetType(EFFECT_TYPE_SINGLE)
   e:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
@@ -32,7 +32,7 @@ function FusionDanceSpSummon(c)
   c:RegisterEffect(e)
 end
 
-function FusionDanceLizard(c)
+function Card.FusionDanceLizard(c)
   local e = Effect.CreateEffect(c)
   e:SetType(EFFECT_TYPE_SINGLE)
   e:SetCode(CARD_CLOCK_LIZARD)
@@ -46,7 +46,7 @@ function FusionDanceLizard(c)
   return e
 end
 
-function FusionSummonOnDeath(c, mat1, mat2)
+function Card.FusionSummonOnDeath(c, mat1, mat2)
   local e1 = Effect.CreateEffect(c)
   e1:SetDescription(aux.Stringid(id, 0))
   e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -83,10 +83,10 @@ function FusionSummonOnDeath(c, mat1, mat2)
 end
 
 function Card.FusionDance(c, mat1, mat2)
-  FusionProc(c, mat1, mat2)
-  FusionDanceSpSummon(c)
-  FusionDanceLizard(c)
-  FusionSummonOnDeath(c, mat1, mat2)
+  c:FusionProc(mat1, mat2)
+  c:FusionDanceLizard()
+  c:FusionDanceSpSummon()
+  c:FusionSummonOnDeath(c, mat1, mat2)
 end
 
 -- Fusion Dance --
