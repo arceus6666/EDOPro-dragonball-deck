@@ -82,8 +82,8 @@ function s.activate(e, tp, eg, ep, ev, re, r, rp)
   local tc2 = h:GetFirst()
 
   if (tc and not tc:IsImmuneToEffect(e)) and (tc2 and not tc2:IsImmuneToEffect(e)) then
-    if tc:IsOnField() and tc:IsFacedown() and tc2:IsOnField() and tc2:IsFacedown() then
-      Duel.ConfirmCards(2 - tp, tc)
+    if tc:IsOnField() and tc2:IsOnField() then
+      Duel.ConfirmCards(2 - tp, Group.FromCards(tc, tc2))
     end
     Duel.SendtoGrave(tc, REASON_EFFECT)
     Duel.SendtoGrave(tc2, REASON_EFFECT)
