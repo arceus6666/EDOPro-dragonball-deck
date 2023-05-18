@@ -6,10 +6,10 @@ local s, id = GetID()
 function s.initial_effect(c)
   c:EnableReviveLimit()
 
-  c:FusionDance(696000005, 696000006)
+  -- c:FusionDance(696000005, 696000006)
 
   --Fusion materials
-  -- c:FusionProc(696000005, 696000006)
+  c:FusionProc(696000005, 696000006)
 
   --lizard check
   -- local e0 = Effect.CreateEffect(c)
@@ -19,6 +19,7 @@ function s.initial_effect(c)
   -- e0:SetCondition(s.lizcon)
   -- e0:SetValue(1)
   -- c:RegisterEffect(e0)
+  c:FusionDanceLizard()
 
   -- Special Summon condition
   -- local e1 = Effect.CreateEffect(c)
@@ -27,6 +28,7 @@ function s.initial_effect(c)
   -- e1:SetCode(EFFECT_SPSUMMON_CONDITION)
   -- e1:SetValue(aux.MetamoranLimit)
   -- c:RegisterEffect(e1)
+  c:FusionDanceSpSummon()
 
   --special summon on death
   -- local e1 = Effect.CreateEffect(c)
@@ -39,6 +41,7 @@ function s.initial_effect(c)
   -- e1:SetTarget(s.target)
   -- e1:SetOperation(s.operation)
   -- c:RegisterEffect(e1)
+  c:FusionSummonOnDeath(696000005, 696000006)
 end
 
 s.listed_names = { CARD_FUSION_DANCE, 696000005, 696000006 }

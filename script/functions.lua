@@ -9,7 +9,7 @@ function Auxiliary.MetamoranLimit(e, se, sp, st)
       -- return se:GetHandler():IsCode(CARD_DARK_FUSION)
       -- or (Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_METAMOR)
       or (Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_SUPREME_CASTLE) -- TODO: change card to metamor
-        and st & SUMMON_TYPE_FUSION == SUMMON_TYPE_FUSION)
+      and st & SUMMON_TYPE_FUSION == SUMMON_TYPE_FUSION)
 end
 
 -- Fusion Dance --
