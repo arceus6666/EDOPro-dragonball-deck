@@ -93,7 +93,7 @@ end
 function s.activate(e, tp, eg, ep, ev, re, r, rp)
   Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_FMATERIAL)
 
-  local g = Duel.SelectMatchingCard(tp, s.tgfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, rp)
+  local g = Duel.SelectMatchingCard(tp, s.tgfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 2, 2, nil, e, tp, rp)
   -- local tc = g:GetFirst()
 
   -- local h = Duel.SelectMatchingCard(tp, s.xgfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, rp)
