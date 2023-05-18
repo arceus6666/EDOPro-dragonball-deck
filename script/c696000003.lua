@@ -84,10 +84,10 @@ function s.activate(e, tp, eg, ep, ev, re, r, rp)
 
   if (tc and not tc:IsImmuneToEffect(e)) and (tc2 and not tc2:IsImmuneToEffect(e)) then
     if tc:IsOnField() and tc2:IsOnField() then
-      Duel.ConfirmCards(1 - tp, Group.FromCards(tc, tc2))
+      Duel.ConfirmCards(1 - tp, g)
     end
-    Duel.SendtoGrave(tc, REASON_EFFECT)
-    Duel.SendtoGrave(tc2, REASON_EFFECT)
+    Duel.SendtoGrave(g, REASON_EFFECT)
+    -- Duel.SendtoGrave(tc2, REASON_EFFECT)
 
     if (not tc:IsLocation(LOCATION_GRAVE)) or (not tc2:IsLocation(LOCATION_GRAVE)) then return end
     Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
