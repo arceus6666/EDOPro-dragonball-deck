@@ -94,7 +94,7 @@ function s.activate(e, tp, eg, ep, ev, re, r, rp)
   -- local h = Duel.SelectMatchingCard(tp, s.xgfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, rp)
   -- local tc2 = h:GetFirst()
 
-  if (g and not g:CheckSameProperty(s.efilter)) then
+  if (g and not g:CheckSameProperty(s.efilter(e))) then
     Duel.SendtoGrave(g, REASON_EFFECT)
 
     if (not g:CheckSameProperty(s.lfilter)) then return end
