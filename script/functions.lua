@@ -68,8 +68,8 @@ local function fusionSummonOnDeath(c, mat1, mat2)
   end)
   e1:SetOperation(function(e, tp, eg, ep, ev, re, r, rp)
     if Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_SPIRIT) or Duel.GetLocationCount(tp, LOCATION_MZONE) < 2 then return end
-    local g1 = Duel.GetMatchingGroup(fsodfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, 696000005)
-    local g2 = Duel.GetMatchingGroup(fsodfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, 696000006)
+    local g1 = Duel.GetMatchingGroup(fsodfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, mat1)
+    local g2 = Duel.GetMatchingGroup(fsodfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, mat2)
     if #g1 > 0 and #g2 > 0 then
       Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
       local sg1 = g1:Select(tp, 1, 1, nil)
