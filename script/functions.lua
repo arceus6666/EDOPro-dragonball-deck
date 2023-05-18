@@ -42,7 +42,7 @@ function Card.FusionDanceLizard(c)
     return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_SUPREME_CASTLE)
   end)
   e:SetValue(1)
-  c:RegisterEffect(e0)
+  c:RegisterEffect(e)
   return e
 end
 
