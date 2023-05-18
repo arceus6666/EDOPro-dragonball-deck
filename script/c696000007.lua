@@ -41,7 +41,7 @@ function s.initial_effect(c)
   -- e1:SetTarget(s.target)
   -- e1:SetOperation(s.operation)
   -- c:RegisterEffect(e1)
-  -- c:FusionSummonOnDeath(696000005, 696000006)
+  c:FusionSummonOnDeath(696000005, 696000006)
 end
 
 s.listed_names = { CARD_FUSION_DANCE, 696000005, 696000006 }
