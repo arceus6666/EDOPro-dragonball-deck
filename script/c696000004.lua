@@ -10,6 +10,15 @@ function s.initial_effect(c)
   -- Fusion.AddProcMix(c, false, false, SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU)
   c:FusionProc(SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU)
 
+  --lizard check
+  local e0 = Effect.CreateEffect(c)
+  e0:SetType(EFFECT_TYPE_SINGLE)
+  e0:SetCode(CARD_CLOCK_LIZARD)
+  e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
+  e0:SetCondition(s.lizcon)
+  e0:SetValue(1)
+  c:RegisterEffect(e0)
+
   -- Special Summon condition
   local e1 = Effect.CreateEffect(c)
   e1:SetType(EFFECT_TYPE_SINGLE)
@@ -31,9 +40,14 @@ function s.initial_effect(c)
   c:RegisterEffect(e1)
 end
 
-s.listed_names = { SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU }
+s.listed_names = { CARD_FUSION_DANCE, SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU }
 s.material_setcode = ARCHETYPES.SAIYAN
 s.fusion_dance = true
+
+function s.lizcon(e, tp, eg, ep, ev, re, r, rp)
+  local c = e:GetHandler()
+  return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_SUPREME_CASTLE)
+end
 
 function s.condition(e, tp, eg, ep, ev, re, r, rp)
   return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
