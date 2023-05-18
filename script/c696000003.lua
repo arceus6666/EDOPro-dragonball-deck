@@ -72,8 +72,12 @@ function s.target(e, tp, eg, ep, ev, re, r, rp, chk)
   Duel.SetOperationInfo(0, CATEGORY_SPECIAL_SUMMON, nil, 1, tp, LOCATION_EXTRA)
 end
 
-function s.efilter(c, e)
+function s.eefilter(e, c)
   return c:IsImmuneToEffect(e)
+end
+
+function s.efilter(e)
+  return s.eefilter(e)
 end
 
 function s.lfilter(c)
