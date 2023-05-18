@@ -77,7 +77,8 @@ function s.eefilter(e, c)
 end
 
 function s.efilter(e)
-  return s.eefilter(e)
+  -- return s.eefilter(e)
+  return function(c) return c:IsImmuneToEffect(e) end
 end
 
 function s.lfilter(c)
