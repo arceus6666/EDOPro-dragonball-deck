@@ -18,15 +18,7 @@ local function fsodfilter(c, e, tp, cd)
       and c:IsCanBeSpecialSummoned(e, 0, tp, false, false, POS_FACEUP)
 end
 
-function Card.FusionDanceSpSummon(c)
-  local e = Effect.CreateEffect(c)
-  e:SetType(EFFECT_TYPE_SINGLE)
-  e:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
-  e:SetCode(EFFECT_SPSUMMON_CONDITION)
-  e:SetValue(aux.MetamoranLimit)
-  c:RegisterEffect(e)
-end
-
+-- lizard check
 function Card.FusionDanceLizard(c)
   local e = Effect.CreateEffect(c)
   e:SetType(EFFECT_TYPE_SINGLE)
@@ -41,6 +33,17 @@ function Card.FusionDanceLizard(c)
   return e
 end
 
+-- Special Summon condition
+function Card.FusionDanceSpSummon(c)
+  local e = Effect.CreateEffect(c)
+  e:SetType(EFFECT_TYPE_SINGLE)
+  e:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
+  e:SetCode(EFFECT_SPSUMMON_CONDITION)
+  e:SetValue(aux.MetamoranLimit)
+  c:RegisterEffect(e)
+end
+
+-- Special summon on death
 function Card.FusionSummonOnDeath(c, id, mat1, mat2)
   local e1 = Effect.CreateEffect(c)
   e1:SetDescription(aux.Stringid(id, 0))
