@@ -1,4 +1,4 @@
--- xeno gogeta
+-- Xeno Gogeta
 
 Duel.LoadScript("functions.lua")
 local s, id = GetID()
