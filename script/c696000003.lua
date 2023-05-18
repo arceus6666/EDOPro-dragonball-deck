@@ -100,6 +100,7 @@ function s.activate(e, tp, eg, ep, ev, re, r, rp)
   -- local tc2 = h:GetFirst()
 
   if (g and not g:CheckSameProperty(s.efilter(e))) then
+    Debug.Message("in if g")
     Duel.SendtoGrave(g, REASON_EFFECT)
 
     if (not g:CheckSameProperty(s.lfilter)) then return end
