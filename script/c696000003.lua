@@ -45,9 +45,17 @@ function s.tgfilter(c, e, tp, rp)
   return c:IsCode(SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU)
 end
 
+function s.xvfilter(c, e, tp, rp)
+  return c:IsCode(SAIYAN.XENO_GOKU)
+end
+
+function s.xgfilter(c, e, tp, rp)
+  return c:IsCode(SAIYAN.XENO_GOKU)
+end
+
 function s.spfilter(c, e, tp, code, rp)
   return
-      -- c:IsType(TYPE_FUSION)
+  -- c:IsType(TYPE_FUSION)
       c:IsCode(SAIYAN.XENO_GOGETA)
       -- and c.material_trap
       and Duel.GetLocationCountFromEx(tp, rp, nil, c) > 0
@@ -65,14 +73,17 @@ end
 
 function s.activate(e, tp, eg, ep, ev, re, r, rp)
   Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_FMATERIAL)
-  local g = Duel.SelectMatchingCard(tp, s.tgfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 2, 2, nil, e, tp, rp)
+  local g = Duel.SelectMatchingCard(tp, s.xvfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, rp)
+  local h = Duel.SelectMatchingCard(tp, s.xgfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, rp)
   local tc = g:GetFirst()
-  if tc and not tc:IsImmuneToEffect(e) then
-    if tc:IsOnField() and tc:IsFacedown() then
+  local tc2 = h:GetFirst()
+  if (tc and not tc:IsImmuneToEffect(e)) and (tc2 and not tc2:IsImmuneToEffect(e)) then
+    if tc:IsOnField() and tc:IsFacedown() and tc2:IsOnField() and tc2:IsFacedown() then
       Duel.ConfirmCards(1 - tp, tc)
     end
     Duel.SendtoGrave(tc, REASON_EFFECT)
-    if not tc:IsLocation(LOCATION_GRAVE) then return end
+    Duel.SendtoGrave(tc2, REASON_EFFECT)
+    if (not tc:IsLocation(LOCATION_GRAVE)) or (not tc2:IsLocation(LOCATION_GRAVE)) then return end
     Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
     local sg = Duel.SelectMatchingCard(tp, s.spfilter, tp, LOCATION_EXTRA, 0, 1, 1, nil, e, tp, tc:GetCode())
     if tc:IsPreviousLocation(LOCATION_MZONE) and tc:IsPreviousPosition(POS_FACEUP) then
