@@ -1,24 +1,19 @@
 Duel.LoadScript("constants.lua")
-
-function Card.FusionProc(c, ...)
-  Fusion.AddProcMix(c, true, true, ...)
-end
-
 function Auxiliary.MetamoranLimit(e, se, sp, st)
   return se:GetHandler():IsCode(CARD_FUSION_DANCE)
       -- return se:GetHandler():IsCode(CARD_DARK_FUSION)
       -- or (Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_METAMOR)
       or (Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_SUPREME_CASTLE) -- TODO: change card to metamor
-      and st & SUMMON_TYPE_FUSION == SUMMON_TYPE_FUSION)
+        and st & SUMMON_TYPE_FUSION == SUMMON_TYPE_FUSION)
 end
 
 -- Fusion Dance --
 
-function FusionProc(c, ...)
+function Card.FusionProc(c, ...)
   Fusion.AddProcMix(c, true, true, ...)
 end
 
-function Fsodfilter(c, e, tp, cd)
+local function fsodfilter(c, e, tp, cd)
   return c:IsCode(cd)
       and c:IsCanBeSpecialSummoned(e, 0, tp, false, false, POS_FACEUP)
 end
@@ -61,15 +56,15 @@ function Card.FusionSummonOnDeath(c, id, mat1, mat2)
       return
           not Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_SPIRIT)
           and Duel.GetLocationCount(tp, LOCATION_MZONE) > 2
-          and Duel.IsExistingMatchingCard(Fsodfilter, tp, LOCATION_GRAVE, 0, 1, nil, e, tp, mat1)
-          and Duel.IsExistingMatchingCard(Fsodfilter, tp, LOCATION_GRAVE, 0, 1, nil, e, tp, mat2)
+          and Duel.IsExistingMatchingCard(fsodfilter, tp, LOCATION_GRAVE, 0, 1, nil, e, tp, mat1)
+          and Duel.IsExistingMatchingCard(fsodfilter, tp, LOCATION_GRAVE, 0, 1, nil, e, tp, mat2)
     end
     Duel.SetOperationInfo(0, CATEGORY_SPECIAL_SUMMON, nil, 2, tp, LOCATION_GRAVE)
   end)
   e1:SetOperation(function(e, tp, eg, ep, ev, re, r, rp)
     if Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_SPIRIT) or Duel.GetLocationCount(tp, LOCATION_MZONE) < 2 then return end
-    local g1 = Duel.GetMatchingGroup(Fsodfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, mat1)
-    local g2 = Duel.GetMatchingGroup(Fsodfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, mat2)
+    local g1 = Duel.GetMatchingGroup(fsodfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, mat1)
+    local g2 = Duel.GetMatchingGroup(fsodfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, mat2)
     if #g1 > 0 and #g2 > 0 then
       Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
       local sg1 = g1:Select(tp, 1, 1, nil)
@@ -82,11 +77,11 @@ function Card.FusionSummonOnDeath(c, id, mat1, mat2)
   c:RegisterEffect(e1)
 end
 
-function Card.FusionDance(c, mat1, mat2)
+function Card.FusionDance(c, id, mat1, mat2)
   c:FusionProc(mat1, mat2)
   c:FusionDanceLizard()
   c:FusionDanceSpSummon()
-  c:FusionSummonOnDeath(c, mat1, mat2)
+  c:FusionSummonOnDeath(id, mat1, mat2)
 end
 
 -- Fusion Dance --
