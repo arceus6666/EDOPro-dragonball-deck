@@ -102,7 +102,7 @@ function s.activate(e, tp, eg, ep, ev, re, r, rp)
     local sc = sg:GetFirst()
     if sc then
       Duel.BreakEffect()
-      Duel.SpecialSummon(sc, 0, tp, tp, false, false, POS_FACEUP)
+      Duel.SpecialSummon(sc, 0, tp, tp, true, false, POS_FACEUP)
       sc:CompleteProcedure()
     end
   end
