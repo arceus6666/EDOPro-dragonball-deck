@@ -42,7 +42,8 @@ function s.initial_effect(c)
 end
 
 function s.tgfilter(c, e, tp, rp)
-  return c:IsCode(SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU)
+  -- return c:IsCode(SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU)
+  return c:IsCode(table.unpack(c.listed_names))
       and Duel.IsExistingMatchingCard(s.spfilter, tp, LOCATION_EXTRA, 0, 1, nil, e, tp, c:GetCode(), rp)
 end
 
@@ -55,10 +56,12 @@ function s.xgfilter(c, e, tp, rp)
 end
 
 function s.spfilter(c, e, tp, code, rp)
+  Debug.Message(code)
   return
-  -- c:IsType(TYPE_FUSION)
-      c:IsCode(SAIYAN.XENO_GOGETA)
-      -- and c.material_trap
+      c:IsType(TYPE_FUSION)
+      -- c:IsCode(SAIYAN.XENO_GOGETA)
+
+      and c.fusion_dance
       and Duel.GetLocationCountFromEx(tp, rp, nil, c) > 0
       and c:IsCanBeSpecialSummoned(e, 0, tp, true, false)
   -- and code == c.material_trap
