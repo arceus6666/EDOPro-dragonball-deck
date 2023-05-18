@@ -79,15 +79,16 @@ function s.activate(e, tp, eg, ep, ev, re, r, rp)
   local tc2 = h:GetFirst()
   if (tc and not tc:IsImmuneToEffect(e)) and (tc2 and not tc2:IsImmuneToEffect(e)) then
     if tc:IsOnField() and tc:IsFacedown() and tc2:IsOnField() and tc2:IsFacedown() then
-      Duel.ConfirmCards(1 - tp, tc)
+      Duel.ConfirmCards(2 - tp, tc)
     end
     Duel.SendtoGrave(tc, REASON_EFFECT)
     Duel.SendtoGrave(tc2, REASON_EFFECT)
     if (not tc:IsLocation(LOCATION_GRAVE)) or (not tc2:IsLocation(LOCATION_GRAVE)) then return end
     Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
     local sg = Duel.SelectMatchingCard(tp, s.spfilter, tp, LOCATION_EXTRA, 0, 1, 1, nil, e, tp, tc:GetCode())
-    if tc:IsPreviousLocation(LOCATION_MZONE) and tc:IsPreviousPosition(POS_FACEUP) then
-      sg = Duel.SelectMatchingCard(tp, s.spfilter, tp, LOCATION_EXTRA, 0, 1, 1, nil, e, tp, tc:GetPreviousCodeOnField())
+    if tc:IsPreviousLocation(LOCATION_MZONE) and tc:IsPreviousPosition(POS_FACEUP) and tc2:IsPreviousLocation(LOCATION_MZONE) and tc2:IsPreviousPosition(POS_FACEUP) then
+      sg = Duel.SelectMatchingCard(tp, s.spfilter, tp, LOCATION_EXTRA, 0, 1, 1, nil, e, tp, tc:GetPreviousCodeOnField(),
+        tc2:GetPreviousCodeOnField())
     end
     local sc = sg:GetFirst()
     if sc then
