@@ -15,7 +15,7 @@ function s.initial_effect(c)
   -- c:RegisterEffect(e1)
   c.RegisterEffect(Fusion.CreateSummonEff({
     handler = c,
-    fusfilter = aux.FilterBoolFunction(Card.IsSetCard, ARCHETYPES.SAIYAN),
+    fusfilter = aux.FilterBoolFunction(Card.IsRace,RACE_FIEND),
     stage2 = s.stage2
   }))
 end
