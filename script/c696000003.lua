@@ -46,7 +46,7 @@ function s.tgfilter(c, e, tp, rp)
 end
 
 function s.xvfilter(c, e, tp, rp)
-  return c:IsCode(SAIYAN.XENO_GOKU)
+  return c:IsCode(SAIYAN.XENO_VEGETA)
 end
 
 function s.xgfilter(c, e, tp, rp)
