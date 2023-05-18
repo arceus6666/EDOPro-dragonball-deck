@@ -14,16 +14,16 @@ end
 
 -- Fusion Dance --
 
-local function fusionProc(c, ...)
+function FusionProc(c, ...)
   Fusion.AddProcMix(c, true, true, ...)
 end
 
-local function fsodfilter(c, e, tp, code)
+function Fsodfilter(c, e, tp, code)
   return c:IsCode(code)
       and c:IsCanBeSpecialSummoned(e, 0, tp, false, false, POS_FACEUP)
 end
 
-local function fusionDanceSpSummon(c)
+function FusionDanceSpSummon(c)
   local e = Effect.CreateEffect(c)
   e:SetType(EFFECT_TYPE_SINGLE)
   e:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
@@ -32,7 +32,7 @@ local function fusionDanceSpSummon(c)
   c:RegisterEffect(e)
 end
 
-local function fusionDanceLizard(c)
+function FusionDanceLizard(c)
   local e = Effect.CreateEffect(c)
   e:SetType(EFFECT_TYPE_SINGLE)
   e:SetCode(CARD_CLOCK_LIZARD)
@@ -46,7 +46,7 @@ local function fusionDanceLizard(c)
   return e
 end
 
-local function fusionSummonOnDeath(c, mat1, mat2)
+function FusionSummonOnDeath(c, mat1, mat2)
   local e1 = Effect.CreateEffect(c)
   e1:SetDescription(aux.Stringid(id, 0))
   e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -61,15 +61,15 @@ local function fusionSummonOnDeath(c, mat1, mat2)
       return
           not Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_SPIRIT)
           and Duel.GetLocationCount(tp, LOCATION_MZONE) > 2
-          and Duel.IsExistingMatchingCard(fsodfilter, tp, LOCATION_GRAVE, 0, 1, nil, e, tp, mat1)
-          and Duel.IsExistingMatchingCard(fsodfilter, tp, LOCATION_GRAVE, 0, 1, nil, e, tp, mat2)
+          and Duel.IsExistingMatchingCard(Fsodfilter, tp, LOCATION_GRAVE, 0, 1, nil, e, tp, mat1)
+          and Duel.IsExistingMatchingCard(Fsodfilter, tp, LOCATION_GRAVE, 0, 1, nil, e, tp, mat2)
     end
     Duel.SetOperationInfo(0, CATEGORY_SPECIAL_SUMMON, nil, 2, tp, LOCATION_GRAVE)
   end)
   e1:SetOperation(function(e, tp, eg, ep, ev, re, r, rp)
     if Duel.IsPlayerAffectedByEffect(tp, CARD_BLUEEYES_SPIRIT) or Duel.GetLocationCount(tp, LOCATION_MZONE) < 2 then return end
-    local g1 = Duel.GetMatchingGroup(fsodfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, mat1)
-    local g2 = Duel.GetMatchingGroup(fsodfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, mat2)
+    local g1 = Duel.GetMatchingGroup(Fsodfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, mat1)
+    local g2 = Duel.GetMatchingGroup(Fsodfilter, tp, LOCATION_GRAVE, 0, nil, e, tp, mat2)
     if #g1 > 0 and #g2 > 0 then
       Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
       local sg1 = g1:Select(tp, 1, 1, nil)
@@ -83,10 +83,10 @@ local function fusionSummonOnDeath(c, mat1, mat2)
 end
 
 function Card.FusionDance(c, mat1, mat2)
-  fusionProc(c, mat1, mat2)
-  fusionDanceSpSummon(c)
-  fusionDanceLizard(c)
-  fusionSummonOnDeath(c, mat1, mat2)
+  FusionProc(c, mat1, mat2)
+  FusionDanceSpSummon(c)
+  FusionDanceLizard(c)
+  FusionSummonOnDeath(c, mat1, mat2)
 end
 
 -- Fusion Dance --
