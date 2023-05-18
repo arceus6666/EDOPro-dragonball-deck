@@ -46,7 +46,7 @@ function Card.FusionDanceLizard(c)
   return e
 end
 
-function Card.FusionSummonOnDeath(c, mat1, mat2)
+function Card.FusionSummonOnDeath(c, id, mat1, mat2)
   local e1 = Effect.CreateEffect(c)
   e1:SetDescription(aux.Stringid(id, 0))
   e1:SetCategory(CATEGORY_SPECIAL_SUMMON)

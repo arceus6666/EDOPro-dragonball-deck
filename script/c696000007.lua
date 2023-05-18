@@ -31,17 +31,17 @@ function s.initial_effect(c)
   c:FusionDanceSpSummon()
 
   --special summon on death
-  -- local e1 = Effect.CreateEffect(c)
-  -- e1:SetDescription(aux.Stringid(id, 0))
-  -- e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-  -- e1:SetType(EFFECT_TYPE_SINGLE + EFFECT_TYPE_TRIGGER_O)
-  -- e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-  -- e1:SetCode(EVENT_TO_GRAVE)
-  -- e1:SetCondition(s.condition)
-  -- e1:SetTarget(s.target)
-  -- e1:SetOperation(s.operation)
-  -- c:RegisterEffect(e1)
-  c:FusionSummonOnDeath(id, 696000005, 696000006)
+  local e1 = Effect.CreateEffect(c)
+  e1:SetDescription(aux.Stringid(id, 0))
+  e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
+  e1:SetType(EFFECT_TYPE_SINGLE + EFFECT_TYPE_TRIGGER_O)
+  e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
+  e1:SetCode(EVENT_TO_GRAVE)
+  e1:SetCondition(s.condition)
+  e1:SetTarget(s.target)
+  e1:SetOperation(s.operation)
+  c:RegisterEffect(e1)
+  -- c:FusionSummonOnDeath(id, 696000005, 696000006)
 end
 
 s.listed_names = { CARD_FUSION_DANCE, 696000005, 696000006 }
