@@ -43,6 +43,7 @@ end
 
 function s.tgfilter(c, e, tp, rp)
   return c:IsCode(SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU)
+      and Duel.IsExistingMatchingCard(s.spfilter, tp, LOCATION_EXTRA, 0, 1, nil, e, tp, c:GetCode(), rp)
 end
 
 function s.xvfilter(c, e, tp, rp)
