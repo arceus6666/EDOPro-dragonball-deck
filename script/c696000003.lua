@@ -78,7 +78,7 @@ end
 
 function s.efilter(e)
   -- return s.eefilter(e)
-  return function(c) return not c:IsImmuneToEffect(e) end
+  return function(c) return c:IsImmuneToEffect(e) end
 end
 
 function s.lfilter(c)
@@ -99,7 +99,7 @@ function s.activate(e, tp, eg, ep, ev, re, r, rp)
   -- local h = Duel.SelectMatchingCard(tp, s.xgfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, rp)
   -- local tc2 = h:GetFirst()
 
-  if (#g > 0 and g:CheckSameProperty(s.efilter(e))) then
+  if (#g > 0 and not g:CheckSameProperty(s.efilter(e))) then
     Debug.Message("in if g")
     Duel.SendtoGrave(g, REASON_EFFECT)
 
