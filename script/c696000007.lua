@@ -22,13 +22,13 @@ function s.initial_effect(c)
   -- c:FusionDanceLizard()
 
   -- Special Summon condition
-  local e1 = Effect.CreateEffect(c)
-  e1:SetType(EFFECT_TYPE_SINGLE)
-  e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
-  e1:SetCode(EFFECT_SPSUMMON_CONDITION)
-  e1:SetValue(aux.MetamoranLimit)
-  c:RegisterEffect(e1)
-  -- c:FusionDanceSpSummon()
+  -- local e1 = Effect.CreateEffect(c)
+  -- e1:SetType(EFFECT_TYPE_SINGLE)
+  -- e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
+  -- e1:SetCode(EFFECT_SPSUMMON_CONDITION)
+  -- e1:SetValue(aux.MetamoranLimit)
+  -- c:RegisterEffect(e1)
+  c:FusionDanceSpSummon()
 
   --special summon on death
   local e1 = Effect.CreateEffect(c)
