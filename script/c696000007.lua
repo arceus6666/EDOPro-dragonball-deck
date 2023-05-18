@@ -12,14 +12,14 @@ function s.initial_effect(c)
   c:FusionProc(696000005, 696000006)
 
   --lizard check
-  local e0 = Effect.CreateEffect(c)
-  e0:SetType(EFFECT_TYPE_SINGLE)
-  e0:SetCode(CARD_CLOCK_LIZARD)
-  e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
-  e0:SetCondition(s.lizcon)
-  e0:SetValue(1)
-  c:RegisterEffect(e0)
-  -- c:FusionDanceLizard()
+  -- local e0 = Effect.CreateEffect(c)
+  -- e0:SetType(EFFECT_TYPE_SINGLE)
+  -- e0:SetCode(CARD_CLOCK_LIZARD)
+  -- e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
+  -- e0:SetCondition(s.lizcon)
+  -- e0:SetValue(1)
+  -- c:RegisterEffect(e0)
+  c:FusionDanceLizard()
 
   -- Special Summon condition
   -- local e1 = Effect.CreateEffect(c)
