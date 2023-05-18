@@ -5,8 +5,8 @@ function Card.FusionProc(c, ...)
 end
 
 function Auxiliary.MetamoranLimit(e, se, sp, st)
-  -- return se:GetHandler():IsCode(CARD_FUSION_DANCE)
-  return se:GetHandler():IsCode(CARD_DARK_FUSION)
+  return se:GetHandler():IsCode(CARD_FUSION_DANCE)
+  -- return se:GetHandler():IsCode(CARD_DARK_FUSION)
       -- or (Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_METAMOR)
       or (Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_SUPREME_CASTLE)
         and st & SUMMON_TYPE_FUSION == SUMMON_TYPE_FUSION)
