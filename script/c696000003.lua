@@ -46,7 +46,9 @@ function s.tgfilter(c, e, tp, rp)
 end
 
 function s.spfilter(c, e, tp, code, rp)
-  return c:IsType(TYPE_FUSION)
+  return
+      -- c:IsType(TYPE_FUSION)
+      c:IsCode(SAIYAN.XENO_GOGETA)
       -- and c.material_trap
       and Duel.GetLocationCountFromEx(tp, rp, nil, c) > 0
       and c:IsCanBeSpecialSummoned(e, 0, tp, true, false)
