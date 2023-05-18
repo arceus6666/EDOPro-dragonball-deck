@@ -72,30 +72,38 @@ function s.target(e, tp, eg, ep, ev, re, r, rp, chk)
   Duel.SetOperationInfo(0, CATEGORY_SPECIAL_SUMMON, nil, 1, tp, LOCATION_EXTRA)
 end
 
+function s.efilter(c, e)
+  return c:IsImmuneToEffect(e)
+end
+
+function s.lfilter(c)
+  return c:IsLocation(LOCATION_GRAVE)
+end
+
+function s.pfilter(c)
+  return c:IsPreviousLocation(LOCATION_MZONE)
+      and c:IsPreviousPosition(POS_FACEUP)
+end
+
 function s.activate(e, tp, eg, ep, ev, re, r, rp)
   Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_FMATERIAL)
 
-  local g = Duel.SelectMatchingCard(tp, s.xvfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, rp)
-  local tc = g:GetFirst()
+  local g = Duel.SelectMatchingCard(tp, s.tgfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, rp)
+  -- local tc = g:GetFirst()
 
-  local h = Duel.SelectMatchingCard(tp, s.xgfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, rp)
-  local tc2 = h:GetFirst()
+  -- local h = Duel.SelectMatchingCard(tp, s.xgfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, rp)
+  -- local tc2 = h:GetFirst()
 
-  if (tc and not tc:IsImmuneToEffect(e)) and (tc2 and not tc2:IsImmuneToEffect(e)) then
-    if tc:IsOnField() and tc2:IsOnField() then
-      Duel.ConfirmCards(2 - tp, Group.FromCards(tc, tc2))
-    end
-    Duel.SendtoGrave(tc, REASON_EFFECT)
-    Duel.SendtoGrave(tc2, REASON_EFFECT)
+  if (g and not g:CheckSameProperty(s.efilter)) then
+    Duel.SendtoGrave(g, REASON_EFFECT)
 
-    if (not tc:IsLocation(LOCATION_GRAVE)) or (not tc2:IsLocation(LOCATION_GRAVE)) then return end
+    if (not g:CheckSameProperty(s.lfilter)) then return end
     Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
 
     local sg = Duel.SelectMatchingCard(tp, s.spfilter, tp, LOCATION_EXTRA, 0,
-      1, 1, nil, e, tp, tc:GetCode(), tc2:GetCode())
-    if tc:IsPreviousLocation(LOCATION_MZONE) and tc:IsPreviousPosition(POS_FACEUP) and tc2:IsPreviousLocation(LOCATION_MZONE) and tc2:IsPreviousPosition(POS_FACEUP) then
-      sg = Duel.SelectMatchingCard(tp, s.spfilter, tp, LOCATION_EXTRA, 0, 1, 1, nil, e, tp, tc:GetPreviousCodeOnField(),
-        tc2:GetPreviousCodeOnField())
+      1, 1, nil, e, tp, g)
+    if (g:CheckSameProperty(s.pfilter)) then
+      sg = Duel.SelectMatchingCard(tp, s.spfilter, tp, LOCATION_EXTRA, 0, 1, 1, nil, e, tp, g)
     end
 
     local sc = sg:GetFirst()
@@ -105,4 +113,29 @@ function s.activate(e, tp, eg, ep, ev, re, r, rp)
       sc:CompleteProcedure()
     end
   end
+
+  -- if (tc and not tc:IsImmuneToEffect(e)) and (tc2 and not tc2:IsImmuneToEffect(e)) then
+  --   if tc:IsOnField() and tc2:IsOnField() then
+  --     Duel.ConfirmCards(1 - tp, Group.FromCards(tc, tc2))
+  --   end
+  --   Duel.SendtoGrave(tc, REASON_EFFECT)
+  --   Duel.SendtoGrave(tc2, REASON_EFFECT)
+
+  --   if (not tc:IsLocation(LOCATION_GRAVE)) or (not tc2:IsLocation(LOCATION_GRAVE)) then return end
+  --   Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
+
+  --   local sg = Duel.SelectMatchingCard(tp, s.spfilter, tp, LOCATION_EXTRA, 0,
+  --     1, 1, nil, e, tp, tc:GetCode(), tc2:GetCode())
+  --   if tc:IsPreviousLocation(LOCATION_MZONE) and tc:IsPreviousPosition(POS_FACEUP) and tc2:IsPreviousLocation(LOCATION_MZONE) and tc2:IsPreviousPosition(POS_FACEUP) then
+  --     sg = Duel.SelectMatchingCard(tp, s.spfilter, tp, LOCATION_EXTRA, 0, 1, 1, nil, e, tp, tc:GetPreviousCodeOnField(),
+  --       tc2:GetPreviousCodeOnField())
+  --   end
+
+  --   local sc = sg:GetFirst()
+  --   if sc then
+  --     Duel.BreakEffect()
+  --     Duel.SpecialSummon(sc, 0, tp, tp, true, false, POS_FACEUP)
+  --     sc:CompleteProcedure()
+  --   end
+  -- end
 end
