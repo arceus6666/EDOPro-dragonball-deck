@@ -37,9 +37,9 @@ end
 function s.hspcon(e, c)
   if c == nil then return true end
   local tp = c:GetControler()
-  return Duel.CheckReleaseGroup(tp, s.hspfilter, 1, false, 1, true, c, tp, nil, false, nil, tp, c)
+  return Duel.CheckReleaseGroup(tp, s.hspfilter, 2, false, 2, true, c, tp, nil, false, nil, tp, c)
 end
-
+--[[ Duel.CheckReleaseGroup(player: number, f: function, count: number[, use_hand: boolean=false, max: number=min, check_field: boolean=false, card_to_check: Card=nil, to_player: number=player, zone: number=0xff], ex: Group|Card|nil, ...): boolean]]--
 function s.hsptg(e, tp, eg, ep, ev, re, r, rp, chk, c)
   local g = Duel.SelectReleaseGroup(tp, s.hspfilter, 1, 1, false, true, true, c, nil, nil, false, nil, tp, c)
   if g then
