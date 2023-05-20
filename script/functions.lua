@@ -1,18 +1,16 @@
 Duel.LoadScript("constants.lua")
 
+-- Fusion Dance --
+
 function Auxiliary.MetamoranLimit(e, se, sp, st)
   return se:GetHandler():IsCode(CARD_FUSION_DANCE)
-      -- return se:GetHandler():IsCode(CARD_DARK_FUSION)
       or (Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_METAMOR)
-        -- or (Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_SUPREME_CASTLE) -- TODO: change card to metamor
         and st & SUMMON_TYPE_FUSION == SUMMON_TYPE_FUSION)
 end
 
 function Card.CanFusionDance(c)
   return c.fusion_dance == true
 end
-
--- Fusion Dance --
 
 function Card.FusionProc(c, ...)
   Fusion.AddProcMix(c, true, true, ...)
@@ -31,7 +29,7 @@ function Card.FusionDanceLizard(c)
   e:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
   e:SetCondition(function(e, tp, eg, ep, ev, re, r, rp)
     local c = e:GetHandler()
-    return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_SUPREME_CASTLE)
+    return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_METAMOR)
   end)
   e:SetValue(1)
   c:RegisterEffect(e)
