@@ -26,20 +26,33 @@ function s.initial_effect(c)
   c:RegisterEffect(e2)
 end
 
-function s.hspfilter(c, tp, sc)
+function s.filtercon(c, tp, sc)
   return c:IsType(TYPE_NORMAL, sc, MATERIAL_FUSION, tp)
-      and c:IsCode(SAIYAN.XENO_VEGETA)
-      -- and c:IsLevelBelow(10) -- level 10 or lower
-      and c:GetEquipGroup():IsExists(aux.FilterBoolFunction(Card.IsCode, POTARA_EARING), 1, nil) --equipped
+      and c:GetEquipGroup():IsExists(aux.FilterBoolFunction(Card.IsCode, POTARA_EARING), 1, nil)
       and c:IsControler(tp) and Duel.GetLocationCountFromEx(tp, tp, c, sc) > 0
+end
+
+function s.hspfilter(c, tp, sc)
+  return c:IsCode(SAIYAN.XENO_VEGETA) and s.filtercon(c, tp, sc)
+end
+
+function s.hspfilter2(c, tp, sc)
+  return c:IsCode(SAIYAN.XENO_GOKU) and s.filtercon(c, tp, sc)
+end
+
+function s.checkcon(c, f)
+  local tp = c:GetControler()
+  return Duel.CheckReleaseGroup(tp, f, 1, false, 1, true, c, tp, nil, false, nil, tp, c)
 end
 
 function s.hspcon(e, c)
   if c == nil then return true end
-  local tp = c:GetControler()
-  return Duel.CheckReleaseGroup(tp, s.hspfilter, 2, false, 2, true, c, tp, nil, false, nil, tp, c)
+  -- return Duel.CheckReleaseGroup(tp, s.hspfilter, 1, false, 1, true, c, tp, nil, false, nil, tp, c)
+  return s.checkcon(c, s.hspfilter) and s.checkcon(c, s.hspfilter2)
 end
---[[ Duel.CheckReleaseGroup(player: number, f: function, count: number[, use_hand: boolean=false, max: number=min, check_field: boolean=false, card_to_check: Card=nil, to_player: number=player, zone: number=0xff], ex: Group|Card|nil, ...): boolean]]--
+
+--[[ Duel.CheckReleaseGroup(player: number, f: function, count: number[, use_hand: boolean=false, max: number=min, check_field: boolean=false, card_to_check: Card=nil, to_player: number=player, zone: number=0xff], ex: Group|Card|nil, ...): boolean]]
+--
 function s.hsptg(e, tp, eg, ep, ev, re, r, rp, chk, c)
   local g = Duel.SelectReleaseGroup(tp, s.hspfilter, 1, 1, false, true, true, c, nil, nil, false, nil, tp, c)
   if g then
