@@ -51,10 +51,10 @@ function s.hspcon(e, c)
   return s.checkcon(c, s.hspfilter) and s.checkcon(c, s.hspfilter2)
 end
 
---[[ Duel.CheckReleaseGroup(player: number, f: function, count: number[, use_hand: boolean=false, max: number=min, check_field: boolean=false, card_to_check: Card=nil, to_player: number=player, zone: number=0xff], ex: Group|Card|nil, ...): boolean]]
---
 function s.hsptg(e, tp, eg, ep, ev, re, r, rp, chk, c)
   local g = Duel.SelectReleaseGroup(tp, s.hspfilter, 1, 1, false, true, true, c, nil, nil, false, nil, tp, c)
+  local h = Duel.SelectReleaseGroup(tp, s.hspfilter2, 1, 1, false, true, true, c, nil, nil, false, nil, tp, c)
+  g = g:AddCard(h)
   if g then
     g:KeepAlive()
     e:SetLabelObject(g)
