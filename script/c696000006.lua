@@ -31,7 +31,3 @@ end
 function s.efilter(e, re, rp)
   return re:IsActiveType(TYPE_EFFECT)
 end
-
--- function s.efilter2(e, re)
---   return re:IsActiveType(TYPE_EFFECT)
--- end
