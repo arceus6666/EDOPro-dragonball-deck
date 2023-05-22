@@ -21,10 +21,10 @@ EDOPro uses master branch by default, if you want to use in-progress branches yo
 #### xeno
 | name          | notes   |
 | :------------ | :------ |
-| xeno vegeks   |         |
 | xeno trunks   |
-| xeno gohanks  |
+| xeno vegeks   |         |
 | xeno gohan    |
-| xeno gotenks  |
+| xeno gohanks  |
 | xeno goten    |
+| xeno gotenks  |
 | super saiyans | ~4 x 10 |
