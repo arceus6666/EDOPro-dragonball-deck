@@ -8,7 +8,7 @@ function s.initial_effect(c)
   --Using monsters from hand or field as material
   local e1 = Fusion.CreateSummonEff({
     handler = c,
-    fusfilter = aux.FilterBoolFunction(Card.IsSetCard, ARCHETYPES.SAIYAN),
+    fusfilter = aux.FilterBoolFunction(Card.CanFusionDance),
     stage2 = s.stage2
   })
   e1:SetCountLimit(1, id, EFFECT_COUNT_CODE_OATH)

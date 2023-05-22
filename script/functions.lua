@@ -1,13 +1,16 @@
 Duel.LoadScript("constants.lua")
+
+-- Fusion Dance --
+
 function Auxiliary.MetamoranLimit(e, se, sp, st)
   return se:GetHandler():IsCode(CARD_FUSION_DANCE)
-      -- return se:GetHandler():IsCode(CARD_DARK_FUSION)
-      -- or (Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_METAMOR)
-      or (Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_SUPREME_CASTLE) -- TODO: change card to metamor
+      or (Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_METAMOR)
         and st & SUMMON_TYPE_FUSION == SUMMON_TYPE_FUSION)
 end
 
--- Fusion Dance --
+function Card.CanFusionDance(c)
+  return c.fusion_dance == true
+end
 
 function Card.FusionProc(c, ...)
   Fusion.AddProcMix(c, true, true, ...)
@@ -26,7 +29,7 @@ function Card.FusionDanceLizard(c)
   e:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
   e:SetCondition(function(e, tp, eg, ep, ev, re, r, rp)
     local c = e:GetHandler()
-    return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_SUPREME_CASTLE)
+    return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(), EFFECT_METAMOR)
   end)
   e:SetValue(1)
   c:RegisterEffect(e)
@@ -88,3 +91,73 @@ function Card.FusionDance(c, id, mat1, mat2)
 end
 
 -- Fusion Dance --
+
+-- Potara Fusion --
+
+function Card.PotaraSpecialSummonCondition(c)
+  local e = Effect.CreateEffect(c)
+  e:SetType(EFFECT_TYPE_SINGLE)
+  e:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
+  e:SetCode(EFFECT_SPSUMMON_CONDITION)
+  e:SetValue(aux.fuslimit)
+  c:RegisterEffect(e)
+end
+
+local function checkcon(c, f)
+  local tp = c:GetControler()
+  return Duel.CheckReleaseGroup(tp, f, 1, false, 1, true, c, tp, nil, false, nil, tp, c)
+end
+
+local function filtercon(c, tp, sc)
+  return c:IsType(TYPE_NORMAL, sc, MATERIAL_FUSION, tp)
+      and c:GetEquipGroup():IsExists(aux.FilterBoolFunction(Card.IsCode, POTARA_EARING), 1, nil)
+      and c:IsControler(tp) and Duel.GetLocationCountFromEx(tp, tp, c, sc) > 0
+end
+
+local function hspfilter(mat)
+  return function(c, tp, sc)
+    return c:IsCode(mat) and filtercon(c, tp, sc)
+  end
+end
+
+local function hspsrg(c, tp, mat)
+  return Duel.SelectReleaseGroup(tp, hspfilter(mat), 1, 1, false, true, true, c, nil, nil, false, nil, tp, c)
+end
+
+function Card.PotaraSpecialSummon(c, mat1, mat2)
+  local e = Effect.CreateEffect(c)
+  e:SetType(EFFECT_TYPE_FIELD)
+  e:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+  e:SetCode(EFFECT_SPSUMMON_PROC)
+  e:SetRange(LOCATION_EXTRA)
+  e:SetCondition(function(e, c)
+    if c == nil then return true end
+    return checkcon(c, hspfilter(mat1)) and checkcon(c, hspfilter(mat2))
+  end)
+  e:SetTarget(function(e, tp, eg, ep, ev, re, r, rp, chk, c)
+    -- local g = Duel.SelectReleaseGroup(tp, hspfilter(mat1), 1, 1, false, true, true, c, nil, nil, false, nil, tp, c)
+    -- local h = Duel.SelectReleaseGroup(tp, hspfilter(mat2), 1, 1, false, true, true, c, nil, nil, false, nil, tp, c)
+    local g = hspsrg(c, tp, mat1):AddCard(hspsrg(c, tp, mat2))
+    -- g = g:AddCard(h)
+    if g then
+      g:KeepAlive()
+      e:SetLabelObject(g)
+      return true
+    end
+    return false
+  end)
+  e:SetOperation(function(e, tp, eg, ep, ev, re, r, rp, c)
+    local g = e:GetLabelObject()
+    if not g then return end
+    Duel.Release(g, REASON_COST)
+    g:DeleteGroup()
+  end)
+  c:RegisterEffect(e)
+end
+
+function Card.PotaraFusion(c, mat1, mat2)
+  c:PotaraSpecialSummonCondition()
+  c:PotaraSpecialSummon(mat1, mat2)
+end
+
+-- Potara Fusion --
