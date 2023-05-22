@@ -1,4 +1,4 @@
--- xeno vegeks
+-- Xeno Vegeks
 
 Duel.LoadScript("functions.lua")
 local s, id = GetID()
