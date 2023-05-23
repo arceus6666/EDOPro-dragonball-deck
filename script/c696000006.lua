@@ -7,7 +7,7 @@ function s.initial_effect(c)
   c:EnableReviveLimit()
 
   -- potara fusion
-  c:PotaraFusion(SAIYAN.XENO_GOKU, SAIYAN.XENO_VEGETA)
+  c:PotaraFusion(SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU)
 
   --cannot be target
   local e1 = Effect.CreateEffect(c)
@@ -31,3 +31,6 @@ end
 function s.efilter(e, re, rp)
   return re:IsActiveType(TYPE_EFFECT)
 end
+
+s.listed_names = { SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU }
+s.potara_fusion = true
