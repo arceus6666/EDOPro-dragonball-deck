@@ -28,7 +28,7 @@ end
 s.listed_series = { ARCHETYPES.SAIYAN }
 
 function s.cfilter(c)
-  return c:IsSetCard(ARCHETYPES.SAIYAN) and c:IsReleasable()
+  return c:IsSetCard(28270) and c:IsReleasable()
 end
 
 function s.spcon(e, c)
