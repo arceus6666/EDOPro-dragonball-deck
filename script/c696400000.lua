@@ -35,30 +35,63 @@ function s.rescon(sg, e, tp, mg)
   return aux.ChkfMMZ(1)(sg, e, tp, mg) and sg:IsExists(s.chk, 1, nil, sg)
 end
 
+-- function s.spcon(e, c)
+--   if c == nil then return true end
+--   local tp = c:GetControler()
+--   local rg = Duel.GetReleaseGroup(tp)
+--   local g1 = rg:Filter(Card.IsCode, nil, SAIYAN.XENO_TRUNKS)
+--   local g2 = rg:Filter(Card.IsSetCard, nil, ARCHETYPES.SAIYAN)
+--   local g = g1:Clone()
+--   g:Merge(g2)
+--   return Duel.GetLocationCount(tp, LOCATION_MZONE) > -2
+--       and #g1 > 0
+--       and #g2 > 0
+--       and #g > 1
+--       and aux.SelectUnselectGroup(g, e, tp, 3, 3, s.rescon, 0)
+-- end
+
+function s.cfilter(c)
+  return c:IsSetCard(ARCHETYPES.SAIYAN) and c:IsReleasable()
+end
+
 function s.spcon(e, c)
   if c == nil then return true end
   local tp = c:GetControler()
-  local rg = Duel.GetReleaseGroup(tp)
-  local g1 = rg:Filter(Card.IsCode, nil, SAIYAN.XENO_TRUNKS)
-  local g2 = rg:Filter(Card.IsSetCard, nil, ARCHETYPES.SAIYAN)
-  local g = g1:Clone()
-  g:Merge(g2)
-  return Duel.GetLocationCount(tp, LOCATION_MZONE) > -2
+  local rg = Duel.GetMatchingGroup(s.cfilter, tp, LOCATION_MZONE + LOCATION_HAND, 0, nil)
+  local rg2 = Duel.GetReleaseGroup(tp)
+  local g1 = rg2:Filter(Card.IsCode, nil, SAIYAN.XENO_TRUNKS)
+  local g = rg:Clone()
+  g:Merge(g1)
+  return #rg > 0
       and #g1 > 0
-      and #g2 > 0
       and #g > 1
-      and aux.SelectUnselectGroup(g, e, tp, 3, 3, s.rescon, 0)
+      and aux.SelectUnselectGroup(g, e, tp, 6, 6, aux.ChkfMMZ(1), 0)
 end
 
-function s.sptg(e, tp, eg, ep, ev, re, r, rp, c)
-  local rg = Duel.GetReleaseGroup(tp)
-  local g1 = rg:Filter(Card.IsCode, nil, SAIYAN.XENO_TRUNKS)
-  local g2 = rg:Filter(Card.IsSetCard, nil, ARCHETYPES.SAIYAN)
-  g1:Merge(g2)
-  local sg = aux.SelectUnselectGroup(g1, e, tp, 3, 3, s.rescon, 1, tp, HINTMSG_RELEASE, nil, nil, true)
-  if #sg > 0 then
-    sg:KeepAlive()
-    e:SetLabelObject(sg)
+-- function s.sptg(e, tp, eg, ep, ev, re, r, rp, c)
+--   local rg = Duel.GetReleaseGroup(tp)
+--   local g1 = rg:Filter(Card.IsCode, nil, SAIYAN.XENO_TRUNKS)
+--   local g2 = rg:Filter(Card.IsSetCard, nil, ARCHETYPES.SAIYAN)
+--   g1:Merge(g2)
+--   local sg = aux.SelectUnselectGroup(g1, e, tp, 3, 3, s.rescon, 1, tp, HINTMSG_RELEASE, nil, nil, true)
+--   if #sg > 0 then
+--     sg:KeepAlive()
+--     e:SetLabelObject(sg)
+--     return true
+--   end
+--   return false
+-- end
+
+function s.sptg(e, tp, eg, ep, ev, re, r, rp, chk, c)
+  local rg = Duel.GetMatchingGroup(s.cfilter, tp, LOCATION_MZONE, 0, nil)
+  local rg2 = Duel.GetReleaseGroup(tp)
+  local g1 = rg2:Filter(Card.IsCode, nil, SAIYAN.XENO_TRUNKS)
+  -- local g = rg:Clone()
+  rg:Merge(g1)
+  local g = aux.SelectUnselectGroup(rg, e, tp, 6, 6, aux.ChkfMMZ(1), 1, tp, HINTMSG_RELEASE, nil, nil, true)
+  if #g > 0 then
+    g:KeepAlive()
+    e:SetLabelObject(g)
     return true
   end
   return false
