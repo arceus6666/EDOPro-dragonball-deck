@@ -27,7 +27,7 @@ end
 
 s.listed_series = { ARCHETYPES.SAIYAN }
 
-local code = ARCHETYPES.SAIYAN + 0
+local code = RACE_SAIYAN + 0
 
 function s.cfilter(c)
   return c:IsSetCard(code) and c:IsReleasable()
