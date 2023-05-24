@@ -27,10 +27,10 @@ end
 
 s.listed_series = { ARCHETYPES.SAIYAN }
 
-local code = RACE_SAIYAN + 0
+local code = SAIYAN.XENO_GOGETA + 0
 
 function s.cfilter(c)
-  return c:IsSetCard(code) and c:IsReleasable()
+  return c:IsSetCard(0x6E6E) and c:IsReleasable()
 end
 
 function s.spcon(e, c)
