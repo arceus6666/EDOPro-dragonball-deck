@@ -161,3 +161,51 @@ function Card.PotaraFusion(c, mat1, mat2)
 end
 
 -- Potara Fusion --
+
+-- Special Summon SSJ1 --
+
+function Card.CannotSpecialSummon(c)
+  local e = Effect.CreateEffect(c)
+  e:SetType(EFFECT_TYPE_SINGLE)
+  e:SetProperty(EFFECT_FLAG_CANNOT_DISABLE + EFFECT_FLAG_UNCOPYABLE)
+  e:SetCode(EFFECT_SPSUMMON_CONDITION)
+  e:SetValue(aux.FALSE)
+  c:RegisterEffect(e)
+end
+
+function Card.SpecialSummonSSJ(c, base)
+  local e = Effect.CreateEffect(c)
+  e:SetType(EFFECT_TYPE_FIELD)
+  e:SetCode(EFFECT_SPSUMMON_PROC)
+  e:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+  e:SetRange(LOCATION_HAND)
+  e:SetCondition(function(e, c)
+    if c == nil then return true end
+    return Duel.CheckReleaseGroup(c:GetControler(), Card.IsCode, 1, false, 1, true, c, c:GetControler(), nil, false, nil,
+      base)
+  end)
+  e:SetTarget(function(e, tp, eg, ep, ev, re, r, rp, c)
+    local g = Duel.SelectReleaseGroup(tp, Card.IsCode, 1, 1, false, true, true, c, nil, nil, false, nil, base)
+    if g then
+      g:KeepAlive()
+      e:SetLabelObject(g)
+      return true
+    end
+    return false
+  end)
+  e:SetOperation(function(e, tp, eg, ep, ev, re, r, rp, c)
+    local g = e:GetLabelObject()
+    if not g then return end
+    Duel.Release(g, REASON_COST)
+    g:DeleteGroup()
+  end
+  )
+  c:RegisterEffect(e)
+end
+
+function Card.TransformSSJ(c, base)
+  c:CannotSpecialSummon()
+  c:SpecialSummonSSJ(base)
+end
+
+-- Special Summon SSJ1 --
