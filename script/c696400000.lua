@@ -27,8 +27,10 @@ end
 
 s.listed_series = { ARCHETYPES.SAIYAN }
 
+local code = ARCHETYPES.SAIYAN
+
 function s.cfilter(c)
-  return c:IsSetCard(ARCHETYPES.SAIYAN) and c:IsReleasable()
+  return c:IsSetCard(code) and c:IsReleasable()
 end
 
 function s.spcon(e, c)
