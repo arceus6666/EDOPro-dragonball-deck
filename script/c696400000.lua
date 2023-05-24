@@ -28,7 +28,7 @@ end
 function s.chk(c, sg)
   -- dracoslayer / Dracoverlord
   -- return c:IsSetCard(0xc7) and sg:IsExists(Card.IsSetCard, 1, c, 0xda)
-  return c:IsCode(SAIYAN.XENO_TRUNKS) and sg:IsExists(Card.IsSetCard, 2, c, ARCHETYPES.SAIYAN)
+  return c:IsNotCode(SAIYAN.XENO_TRUNKS) and sg:IsExists(Card.IsSetCard, 2, c, ARCHETYPES.SAIYAN)
 end
 
 function s.rescon(sg, e, tp, mg)
@@ -39,7 +39,7 @@ function s.spcon(e, c)
   if c == nil then return true end
   local tp = c:GetControler()
   local rg = Duel.GetReleaseGroup(tp)
-  local g1 = rg:Filter(Card.IsCode, nil, SAIYAN.XENO_TRUNKS)
+  local g1 = rg:Filter(Card.IsNotCode, nil, SAIYAN.XENO_TRUNKS)
   local g2 = rg:Filter(Card.IsSetCard, nil, ARCHETYPES.SAIYAN)
   local g = g1:Clone()
   g:Merge(g2)
@@ -52,7 +52,7 @@ end
 
 function s.sptg(e, tp, eg, ep, ev, re, r, rp, c)
   local rg = Duel.GetReleaseGroup(tp)
-  local g1 = rg:Filter(Card.IsCode, nil, SAIYAN.XENO_TRUNKS)
+  local g1 = rg:Filter(Card.IsNotCode, nil, SAIYAN.XENO_TRUNKS)
   local g2 = rg:Filter(Card.IsSetCard, nil, ARCHETYPES.SAIYAN)
   g1:Merge(g2)
   local sg = aux.SelectUnselectGroup(g1, e, tp, 3, 3, s.rescon, 1, tp, HINTMSG_RELEASE, nil, nil, true)

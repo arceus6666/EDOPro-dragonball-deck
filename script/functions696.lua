@@ -1,5 +1,9 @@
 Duel.LoadScript("constants696.lua")
 
+function Card.IsNotCode(c, ...)
+  return not c:IsCode(...)
+end
+
 -- Fusion Dance --
 
 function Auxiliary.MetamoranLimit(e, se, sp, st)
