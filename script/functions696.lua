@@ -1,4 +1,4 @@
-Duel.LoadScript("constants.lua")
+Duel.LoadScript("constants696.lua")
 
 -- Fusion Dance --
 
