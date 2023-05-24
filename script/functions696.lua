@@ -1,7 +1,8 @@
 Duel.LoadScript("constants696.lua")
 
 function Card.IsNotCode(c, ...)
-  return not c:IsCode(...)
+  local codes = { ... }
+  return not c:IsCode(table.unpack(codes))
 end
 
 -- Fusion Dance --
