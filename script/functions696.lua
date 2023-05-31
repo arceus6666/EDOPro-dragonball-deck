@@ -218,7 +218,7 @@ local function rescon(base)
         and sg:IsExists(
           function(c, sg)
             return c:IsCode(base)
-                and sg:IsExists(Card.IsSetCard, 4, c, ARCHETYPES696.SAIYAN)
+                and sg:IsExists(Card.IsSetCard, 4, c, ARCHETYPES.SAIYAN)
           end,
           1, nil, sg)
   end
@@ -241,7 +241,7 @@ function Card.TransformSaiyanGod(c, base)
     local tp = c:GetControler()
     local rg = Duel.GetReleaseGroup(tp)
     local g1 = rg:Filter(Card.IsCode, nil, base)
-    local g2 = rg:Filter(Card.IsSetCard, nil, ARCHETYPES696.SAIYAN)
+    local g2 = rg:Filter(Card.IsSetCard, nil, ARCHETYPES.SAIYAN)
     local g = g1:Clone()
     g:Merge(g2)
     return Duel.GetLocationCount(tp, LOCATION_MZONE) > -2
@@ -253,7 +253,7 @@ function Card.TransformSaiyanGod(c, base)
   e1:SetTarget(function(e, tp, eg, ep, ev, re, r, rp, c)
     local rg = Duel.GetReleaseGroup(tp)
     local g1 = rg:Filter(Card.IsCode, nil, base)
-    local g2 = rg:Filter(Card.IsSetCard, nil, ARCHETYPES696.SAIYAN)
+    local g2 = rg:Filter(Card.IsSetCard, nil, ARCHETYPES.SAIYAN)
     g1:Merge(g2)
     local sg = aux.SelectUnselectGroup(g1, e, tp, 5, 5, rescon(base), 1,
       tp, HINTMSG_RELEASE, nil, nil, true)
