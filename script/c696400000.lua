@@ -25,12 +25,12 @@ function s.initial_effect(c)
   c:RegisterEffect(e1)
 end
 
-s.listed_series = { ARCHETYPES.SAIYAN }
+s.listed_series = { ARCHETYPES696.SAIYAN }
 
 local code = SAIYAN.XENO_GOGETA + 0
 
 function s.cfilter(c)
-  return c:IsSetCard(ARCHETYPES.SAIYAN) and c:IsReleasable()
+  return c:IsSetCard(ARCHETYPES696.SAIYAN) and c:IsReleasable()
 end
 
 function s.spcon(e, c)

@@ -10,5 +10,5 @@ function s.initial_effect(c)
 end
 
 s.listed_names = { CARD_FUSION_DANCE, SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU }
-s.material_setcode = ARCHETYPES.SAIYAN
+s.material_setcode = ARCHETYPES696.SAIYAN
 s.fusion_dance = true

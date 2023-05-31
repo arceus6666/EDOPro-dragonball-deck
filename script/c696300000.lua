@@ -8,7 +8,7 @@ function s.initial_effect(c)
   -- Synchro.AddProcedure(c,
   --   Synchro.NonTunerEx(Card.IsCode, SAIYAN.XENO_TRUNKS),
   --   1, 1,
-  --   Synchro.NonTunerEx(Card.IsSetCard, ARCHETYPES.SAIYAN),
+  --   Synchro.NonTunerEx(Card.IsSetCard, ARCHETYPES696.SAIYAN),
   --   4, 4
   -- )
   c:EnableReviveLimit()
