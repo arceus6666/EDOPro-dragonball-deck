@@ -1,7 +1,7 @@
 Duel.LoadScript("constants696.lua")
 
 function Card.IsCanBeSaiyanGod(c)
-  return c.saiyan_god
+  return c:IsCode(SAIYAN.GODS)
 end
 
 RitualCopy = aux.FunctionWithNamedArgs(
@@ -25,10 +25,10 @@ RitualCopy = aux.FunctionWithNamedArgs(
     e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
     e1:SetType(EFFECT_TYPE_ACTIVATE)
     e1:SetCode(EVENT_FREE_CHAIN)
-    e1:SetTarget(function (e)
+    e1:SetTarget(function(e)
       Debug.Message(e)
       return Ritual.Target(filter, _type, lv, extrafil, extraop, matfilter, stage2, location, forcedselection,
-      specificmatfilter, requirementfunc, sumpos, extratg)
+        specificmatfilter, requirementfunc, sumpos, extratg)
     end)
     e1:SetOperation(Ritual.Operation(filter, _type, lv, extrafil, extraop, matfilter, stage2, location, forcedselection,
       customoperation, specificmatfilter, requirementfunc, sumpos))
