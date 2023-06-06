@@ -102,6 +102,7 @@ end
 
 s.listed_series = { 0x10a2 }
 function s.tgfilter(c, e, tp)
+  Debug.Message("selected", c:GetCode())
   -- target monster to sacrifice
   return c:IsFaceup()
       -- and c:IsSetCard(0x10a2)
@@ -137,7 +138,7 @@ function s.target(e, tp, eg, ep, ev, re, r, rp, chk, chkc)
 
   Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_TARGET)
   Duel.SelectTarget(tp, s.tgfilter, tp, LOCATION_MZONE, 0, 1, 1, nil, e, tp)
-  Debug.Message("god selected")
+  -- Debug.Message("target selected")
   Duel.SetOperationInfo(0, CATEGORY_SPECIAL_SUMMON, nil, 1, tp, LOCATION_HAND)
 end
 
