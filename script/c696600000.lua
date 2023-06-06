@@ -105,7 +105,7 @@ function s.mfilter(c)
   Debug.Message(c.saiyan_god)
   -- what to tribute
   -- return c:IsLocation(LOCATION_HAND) and c:IsType(TYPE_NORMAL)
-  return c:IsLocation(LOCATION_HAND + LOCATION_MZONE)
+  return c:IsLocation(LOCATION_HAND)
 end
 
 function s.stage2(mat, e, tp, eg, ep, ev, re, r, rp, tc)
