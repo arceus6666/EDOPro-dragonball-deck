@@ -144,16 +144,16 @@ end
 
 function s.activate(e, tp, eg, ep, ev, re, r, rp)
   local tc = Duel.GetFirstTarget()
-  if tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsCanBeFusionMaterial() and not tc:IsImmuneToEffect(e) then
+  if tc:IsRelateToEffect(e) and tc:IsFaceup() and not tc:IsImmuneToEffect(e) then
     Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
     local sg = Duel.SelectMatchingCard(tp, s.spfilter, tp, LOCATION_HAND, 0, 1, 1, nil, e, tp, tc)
     local sc = sg:GetFirst()
-    Debug.Message("god selected", sc:GetCode())
+    -- Debug.Message("god selected", sc:GetCode())
     if sc then
-      sc:SetMaterial(Group.FromCards(tc))
+      -- sc:SetMaterial(Group.FromCards(tc))
       Duel.SendtoGrave(tc, REASON_EFFECT + REASON_MATERIAL + REASON_FUSION)
       Duel.BreakEffect()
-      Duel.SpecialSummon(sc, SUMMON_TYPE_FUSION, tp, tp, false, false, POS_FACEUP)
+      Duel.SpecialSummon(sc, SUMMON_TYPE_SPECIAL, tp, tp, false, false, POS_FACEUP)
       sc:CompleteProcedure()
     end
   end
