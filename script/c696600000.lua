@@ -91,7 +91,8 @@ function s.initial_effect(c)
   local e1 = Ritual.CreateProc({
     handler = c,
     lvtype = RITPROC_EQUAL,
-    location = LOCATION_HAND,
+    -- location = LOCATION_HAND,
+    location = LOCATION_DECK,
     matfilter = s.mfilter,
     stage2 = s.stage2,
     -- filter = aux.FilterBoolFunction(Card.IsGod)
@@ -104,8 +105,8 @@ function s.mfilter(c)
   Debug.Message(c:GetCode())
   Debug.Message(c.saiyan_god)
   -- what to tribute
-  -- return c:IsLocation(LOCATION_HAND) and c:IsType(TYPE_NORMAL)
-  return c:IsLocation(LOCATION_HAND)
+  return c:IsLocation(LOCATION_HAND) and c:IsType(TYPE_NORMAL)
+  -- return c:IsLocation(LOCATION_HAND)
 end
 
 function s.stage2(mat, e, tp, eg, ep, ev, re, r, rp, tc)
