@@ -137,6 +137,7 @@ function s.target(e, tp, eg, ep, ev, re, r, rp, chk, chkc)
 
   Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_TARGET)
   Duel.SelectTarget(tp, s.tgfilter, tp, LOCATION_MZONE, 0, 1, 1, nil, e, tp)
+  Debug.Message("god selected")
   Duel.SetOperationInfo(0, CATEGORY_SPECIAL_SUMMON, nil, 1, tp, LOCATION_HAND)
 end
 
