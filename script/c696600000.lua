@@ -123,7 +123,7 @@ function s.spfilter(c, e, tp, mc)
   --     c:IsCanBeSpecialSummoned(e, SUMMON_TYPE_FUSION, tp, false, false)
   --     and (#mustg == 0 or (#mustg == 1 and mustg:IsContains(mc)))
   if c:GetCode() == SAIYAN.TRANSFORMED_GODS[mc:GetCode()] then
-    Debug.Message(c:IsCanBeSpecialSummoned(e, SUMMON_TYPE_SPECIAL, tp, false, false))
+    Debug.Message(c:IsCanBeSpecialSummoned(e, SUMMON_TYPE_SPECIAL, tp, true, false))
   end
 
   return c:GetCode() == SAIYAN.TRANSFORMED_GODS[mc:GetCode()]
