@@ -100,7 +100,7 @@ function s.initial_effect(c)
 end
 
 function s.mfilter(c)
-  Debug.Message(c)
+  Debug.Message(c.saiyan_god)
   -- what to tribute
   -- return c:IsLocation(LOCATION_HAND) and c:IsType(TYPE_NORMAL)
   return c:IsLocation(LOCATION_HAND + LOCATION_MZONE)
