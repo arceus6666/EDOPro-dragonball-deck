@@ -88,14 +88,15 @@ local s, id = GetID()
 -- end
 
 function s.initial_effect(c)
-  local e1 = Ritual.CreateProc({
+  local e1 = RitualCopy({
     handler = c,
     lvtype = RITPROC_EQUAL,
     location = LOCATION_HAND,
     -- location = LOCATION_DECK,
     matfilter = s.mfilter,
     stage2 = s.stage2,
-    filter = aux.FilterBoolFunction(Card.IsGod)
+    filter = aux.FilterBoolFunction(Card.IsGod),
+    lv = 0
   })
   e1:SetCountLimit(1, id, EFFECT_COUNT_CODE_OATH)
   c:RegisterEffect(e1)
