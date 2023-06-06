@@ -127,7 +127,7 @@ function s.spfilter(c, e, tp, mc)
   end
 
   return c:GetCode() == SAIYAN.TRANSFORMED_GODS[mc:GetCode()]
-      and c:IsCanBeSpecialSummoned(e, SUMMON_TYPE_SPECIAL, tp, false, false)
+      and c:IsCanBeSpecialSummoned(e, SUMMON_TYPE_SPECIAL, tp, true, false)
 end
 
 function s.target(e, tp, eg, ep, ev, re, r, rp, chk, chkc)
