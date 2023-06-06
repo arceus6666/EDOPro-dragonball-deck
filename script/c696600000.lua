@@ -108,9 +108,9 @@ function s.tgfilter(c, e, tp)
 end
 
 function s.spfilter(c, e, tp, mc)
-  local c = Duel.GetLocationCount(tp, LOCATION_MZONE, tp)
+  local cc = Duel.GetLocationCount(tp, LOCATION_MZONE, tp)
   local ex = Duel.GetLocationCountFromEx(tp, tp, mc, c)
-  Debug.Message(ex, c)
+  Debug.Message("ex", ex, "-----", "cc", cc, "-----")
   if ex <= 0 then return false end
   local mustg = aux.GetMustBeMaterialGroup(tp, nil, tp, c, nil, REASON_FUSION)
   return c:IsType(TYPE_FUSION) and c:ListsCodeAsMaterial(mc:GetCode()) and
