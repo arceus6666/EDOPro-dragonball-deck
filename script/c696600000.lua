@@ -104,7 +104,7 @@ s.listed_series = { 0x10a2 }
 function s.tgfilter(c, e, tp)
   -- target monster
   return c:IsFaceup() and c:IsSetCard(0x10a2) and c:IsCanBeFusionMaterial()
-      and Duel.IsExistingMatchingCard(s.spfilter, tp, LOCATION_EXTRA, 0, 1, nil, e, tp, c)
+      and Duel.IsExistingMatchingCard(s.spfilter, tp, LOCATION_HAND, 0, 1, nil, e, tp, c)
 end
 
 function s.spfilter(c, e, tp, mc)
