@@ -7,7 +7,7 @@ end
 RitualCopy = aux.FunctionWithNamedArgs(
   function(c, _type, filter, lv, desc, extrafil, extraop, matfilter, stage2, location, forcedselection, customoperation,
            specificmatfilter, requirementfunc, sumpos, extratg)
-    Debug.Message(c:GetCode(), lv)
+    Debug.Message("copy", c:GetCode(), lv)
     --lv can be a function (like GetLevel/GetOriginalLevel), fixed level, if nil it defaults to GetLevel
     if filter and type(filter) == "function" then
       local mt = c.__index

@@ -96,7 +96,7 @@ function s.initial_effect(c)
     matfilter = s.mfilter,
     stage2 = s.stage2,
     filter = aux.FilterBoolFunction(Card.IsGod),
-    lv = 0
+    lv = 8
   })
   e1:SetCountLimit(1, id, EFFECT_COUNT_CODE_OATH)
   c:RegisterEffect(e1)
