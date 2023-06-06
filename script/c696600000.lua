@@ -56,8 +56,10 @@ function s.e1Operation(e, tp, eg, ep, ev, re, r, rp)
 
   local lp = Duel.GetLP(tp)
   Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
+  Debug.Message("pre select")
   local tg = Duel.SelectMatchingCard(tp, s.filter, tp, LOCATION_HAND,
     0, 1, 1, nil, e, tp, lp)
+  Debug.Message("post select")
   local tc = tg:GetFirst()
   if tc then
     -- TODO: maybe "remove" can be improved with a selection box
