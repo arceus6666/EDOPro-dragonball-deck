@@ -94,7 +94,7 @@ function s.initial_effect(c)
     location = LOCATION_HAND,
     matfilter = s.mfilter,
     stage2 = s.stage2,
-    filter = aux.FilterBoolFunction(Card.IsGod)
+    -- filter = aux.FilterBoolFunction(Card.IsGod)
   })
   e1:SetCountLimit(1, id, EFFECT_COUNT_CODE_OATH)
   c:RegisterEffect(e1)
