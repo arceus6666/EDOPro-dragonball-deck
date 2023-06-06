@@ -270,7 +270,7 @@ function Card.TransformSaiyanGod(c, base)
   local e1 = Effect.CreateEffect(c)
   e1:SetType(EFFECT_TYPE_FIELD)
   e1:SetCode(EFFECT_SPSUMMON_PROC)
-  e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+  -- e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
   e1:SetRange(LOCATION_HAND)
   e1:SetCondition(function(e, c)
     if c == nil then return true end
