@@ -25,8 +25,11 @@ RitualCopy = aux.FunctionWithNamedArgs(
     e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
     e1:SetType(EFFECT_TYPE_ACTIVATE)
     e1:SetCode(EVENT_FREE_CHAIN)
-    e1:SetTarget(Ritual.Target(filter, _type, lv, extrafil, extraop, matfilter, stage2, location, forcedselection,
-      specificmatfilter, requirementfunc, sumpos, extratg))
+    e1:SetTarget(function (e)
+      Debug.Message(e)
+      return Ritual.Target(filter, _type, lv, extrafil, extraop, matfilter, stage2, location, forcedselection,
+      specificmatfilter, requirementfunc, sumpos, extratg)
+    end)
     e1:SetOperation(Ritual.Operation(filter, _type, lv, extrafil, extraop, matfilter, stage2, location, forcedselection,
       customoperation, specificmatfilter, requirementfunc, sumpos))
     return e1
