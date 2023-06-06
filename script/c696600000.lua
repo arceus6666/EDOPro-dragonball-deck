@@ -52,7 +52,10 @@ function s.e1Operation(e, tp, eg, ep, ev, re, r, rp)
   if Duel.GetLocationCount(tp, LOCATION_MZONE) <= 0 then return end
 
   Debug.Message("pre gyg")
-  local gyg = s.gygroup(tp)
+  -- local gyg = s.gygroup(tp)
+  local gyg = Duel.SelectMatchingCard(tp, function(c, e, tp, lp)
+    return c:IsCode(SAIYAN.XENO_TRUNKS)
+  end, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, lp)
   Debug.Message("post gyg")
   if gyg:GetCount() < 1 then return end
 
