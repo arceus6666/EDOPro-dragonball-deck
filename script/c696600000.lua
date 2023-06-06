@@ -51,15 +51,17 @@ end
 function s.e1Operation(e, tp, eg, ep, ev, re, r, rp)
   if Duel.GetLocationCount(tp, LOCATION_MZONE) <= 0 then return end
 
+  Debug.Message("pre gyg")
   local gyg = s.gygroup(tp)
+  Debug.Message("post gyg")
   if gyg:GetCount() < 1 then return end
 
   local lp = Duel.GetLP(tp)
   Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
-  Debug.Message("pre select")
+  -- Debug.Message("pre select")
   local tg = Duel.SelectMatchingCard(tp, s.filter, tp, LOCATION_HAND,
     0, 1, 1, nil, e, tp, lp)
-  Debug.Message("post select")
+  -- Debug.Message("post select")
   local tc = tg:GetFirst()
   if tc then
     -- TODO: maybe "remove" can be improved with a selection box
