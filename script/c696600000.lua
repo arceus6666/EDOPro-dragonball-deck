@@ -111,16 +111,16 @@ function s.initial_effect(c)
 end
 
 function s.mfilter(c)
-  Debug.Message(c:GetCode())
-  Debug.Message(c.saiyan_god)
+  -- Debug.Message(c:GetCode())
+  -- Debug.Message(c.saiyan_god)
   -- what to tribute
   return c:IsLocation(LOCATION_HAND) and c:IsType(TYPE_NORMAL)
   -- return c:IsLocation(LOCATION_HAND)
 end
 
 function s.stage2(mat, e, tp, eg, ep, ev, re, r, rp, tc)
-  Debug.Message("stage2")
-  Debug.Message(mat)
+  -- Debug.Message("stage2")
+  -- Debug.Message(mat)
   tc:RegisterFlagEffect(id, RESET_EVENT + RESETS_STANDARD + RESET_PHASE + PHASE_END + RESET_OPPO_TURN,
     EFFECT_FLAG_CLIENT_HINT, 1, 0, aux.Stringid(id, 1))
   local e1 = Effect.CreateEffect(e:GetHandler())
