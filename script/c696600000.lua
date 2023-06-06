@@ -113,9 +113,9 @@ end
 function s.spfilter(c, e, tp, mc)
   -- monster to summon
 
-  -- local cc = Duel.GetLocationCount(tp, LOCATION_MZONE, tp)
-  -- local ex = Duel.GetLocationCountFromEx(tp, tp, mc, c)
-  -- Debug.Message("ex", ex, "-----", "cc", cc, "-----")
+  local cc = Duel.GetLocationCount(tp, LOCATION_MZONE, tp)
+  local ex = Duel.GetLocationCountFromEx(tp, tp, mc, c)
+  Debug.Message("ex", ex, "-----", "cc", cc, "-----")
   if Duel.GetLocationCount(tp, LOCATION_MZONE, tp) <= 0 then return false end
   Debug.Message(mc)
   -- local mustg = aux.GetMustBeMaterialGroup(tp, nil, tp, c, nil, REASON_FUSION)
