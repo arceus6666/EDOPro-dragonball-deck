@@ -28,6 +28,10 @@ function s.filter(c, e, tp, lp)
   return c:IsCode(XENO_TRUNKS_GOD)
 end
 
+function s.gyfilter(c, e, tp, lp)
+  return c:IsCode(SAIYAN.XENO_TRUNKS)
+end
+
 function s.gygroup(tp)
   return Duel.GetMatchingGroup(function(c)
     return
@@ -51,13 +55,13 @@ end
 function s.e1Operation(e, tp, eg, ep, ev, re, r, rp)
   if Duel.GetLocationCount(tp, LOCATION_MZONE) <= 0 then return end
 
-  Debug.Message("pre gyg")
+  -- Debug.Message("pre gyg")
   -- local gyg = s.gygroup(tp)
-  local gyg = Duel.SelectMatchingCard(tp, function(c, e, tp, lp)
-    return c:IsCode(SAIYAN.XENO_TRUNKS)
-  end, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, lp)
-  Debug.Message("post gyg")
-  if gyg:GetCount() < 1 then return end
+  local gyg = Duel.SelectMatchingCard(tp, s.gyfilter, tp, LOCATION_HAND + LOCATION_MZONE, 0, 1, 1, nil, e, tp, lp)
+  -- Debug.Message("post gyg")
+  -- local gtc = gyg:GetFirst()
+
+  if not #gyg then return end
 
   local lp = Duel.GetLP(tp)
   Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
@@ -66,14 +70,16 @@ function s.e1Operation(e, tp, eg, ep, ev, re, r, rp)
     0, 1, 1, nil, e, tp, lp)
   -- Debug.Message("post select")
   local tc = tg:GetFirst()
+
   if tc then
     -- TODO: maybe "remove" can be improved with a selection box
     -- Duel.SetOperationInfo(0, CATEGORY_REMOVE, nil, 1, tp, LOCATION_GRAVE)
     -- local gp = gyg:FilterSelect(tp, s.filter, 1, 1, false, nil)
     -- Duel.Remove(gp, LOCATION_GRAVE, 0, tp)
-    mustpay = true
-    Duel.Remove(gyg:GetFirst(), LOCATION_GRAVE, 0, tp)
-    mustpay = false
+    -- mustpay = true
+    -- Duel.Remove(gyg:GetFirst(), LOCATION_GRAVE, 0, tp)
+    Duel.SendtoGrave(gyg:GetFirst(), REASON_EFFECT + REASON_MATERIAL + REASON_RITUAL)
+    -- mustpay = false
     tc:SetMaterial(nil)
     Duel.SpecialSummon(tc, SUMMON_TYPE_RITUAL, tp, tp, true, false, POS_FACEUP)
     tc:CompleteProcedure()
