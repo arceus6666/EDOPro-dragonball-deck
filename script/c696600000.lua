@@ -153,7 +153,7 @@ function s.activate(e, tp, eg, ep, ev, re, r, rp)
       -- sc:SetMaterial(Group.FromCards(tc))
       Duel.SendtoGrave(tc, REASON_EFFECT + REASON_MATERIAL + REASON_FUSION)
       Duel.BreakEffect()
-      Duel.SpecialSummon(sc, SUMMON_TYPE_SPECIAL, tp, tp, false, false, POS_FACEUP)
+      Duel.SpecialSummon(sc, SUMMON_TYPE_SPECIAL, tp, tp, true, false, POS_FACEUP)
       sc:CompleteProcedure()
     end
   end
