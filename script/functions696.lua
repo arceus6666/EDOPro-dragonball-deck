@@ -1,6 +1,6 @@
 Duel.LoadScript("constants696.lua")
 
-function Card.IsGod(c)
+function Card.IsCanBeSaiyanGod(c)
   return c.saiyan_god
 end
 
