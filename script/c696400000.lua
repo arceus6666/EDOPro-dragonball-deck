@@ -12,3 +12,4 @@ end
 
 s.listed_names = { SAIYAN.XENO_TRUNKS }
 s.listed_series = { ARCHETYPES696.SAIYAN }
+s.saiyan_god = true

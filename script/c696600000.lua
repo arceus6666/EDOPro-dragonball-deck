@@ -22,7 +22,7 @@ end
 
 local XENO_TRUNKS_GOD = 696400000
 
-s.listed_names = { SAIYAN.XENO_TRUNKS, XENO_TRUNKS_GOD }
+s.listed_names = { SAIYAN.XENO_VEGETA, SAIYAN.XENO_VEGETA, SAIYAN.XENO_TRUNKS, XENO_TRUNKS_GOD }
 
 function s.filter(c, e, tp, lp)
   return c:IsCode(XENO_TRUNKS_GOD)
@@ -42,6 +42,7 @@ function s.gygroup(tp)
 end
 
 function s.e1Target(e, tp, eg, ep, ev, re, r, rp, chk)
+  Debug.Message("target")
   if chk == 0 then
     local lp = Duel.GetLP(tp)
     return Duel.GetLocationCount(tp, LOCATION_MZONE) > 0 and
