@@ -91,7 +91,7 @@ function s.initial_effect(c)
   local e1 = Ritual.CreateProc({
     handler = c,
     lvtype = RITPROC_EQUAL,
-    location = LOCATION_DECK,
+    location = LOCATION_HAND,
     matfilter = s.mfilter,
     stage2 = s.stage2,
     filter = aux.FilterBoolFunction(Card.IsGod)
