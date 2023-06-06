@@ -1,5 +1,9 @@
 Duel.LoadScript("constants696.lua")
 
+function Card.IsGod(c)
+  return c.saiyan_god
+end
+
 -- Fusion Dance --
 
 function Auxiliary.MetamoranLimit(e, se, sp, st)

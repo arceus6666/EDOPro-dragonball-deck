@@ -93,13 +93,15 @@ function s.initial_effect(c)
     lvtype = RITPROC_EQUAL,
     location = LOCATION_DECK,
     matfilter = s.mfilter,
-    stage2 = s.stage2
+    stage2 = s.stage2,
+    filter = aux.FilterBoolFunction(Card.IsGod)
   })
   e1:SetCountLimit(1, id, EFFECT_COUNT_CODE_OATH)
   c:RegisterEffect(e1)
 end
 
 function s.mfilter(c)
+  Debug.Message(c:GetCode())
   Debug.Message(c.saiyan_god)
   -- what to tribute
   -- return c:IsLocation(LOCATION_HAND) and c:IsType(TYPE_NORMAL)
@@ -107,6 +109,8 @@ function s.mfilter(c)
 end
 
 function s.stage2(mat, e, tp, eg, ep, ev, re, r, rp, tc)
+  Debug.Message("stage2")
+  Debug.Message(mat)
   tc:RegisterFlagEffect(id, RESET_EVENT + RESETS_STANDARD + RESET_PHASE + PHASE_END + RESET_OPPO_TURN,
     EFFECT_FLAG_CLIENT_HINT, 1, 0, aux.Stringid(id, 1))
   local e1 = Effect.CreateEffect(e:GetHandler())
