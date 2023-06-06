@@ -34,7 +34,7 @@ function s.gygroup(tp)
         not Duel.IsPlayerAffectedByEffect(c:GetControler(), 69832741)
         and c:IsCode(SAIYAN.XENO_TRUNKS)
         and c:IsAbleToRemove()
-  end, tp, LOCATION_GRAVE, 0, nil)
+  end, tp, LOCATION_HAND + LOCATION_MZONE, 0, nil)
 end
 
 function s.e1Target(e, tp, eg, ep, ev, re, r, rp, chk)
