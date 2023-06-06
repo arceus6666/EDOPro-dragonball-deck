@@ -117,12 +117,15 @@ function s.spfilter(c, e, tp, mc)
   -- local ex = Duel.GetLocationCountFromEx(tp, tp, mc, c)
   -- Debug.Message("ex", ex, "-----", "cc", cc, "-----")
   if Duel.GetLocationCount(tp, LOCATION_MZONE, tp) <= 0 then return false end
-  Debug.Message(mc:GetCode(), c:GetCode(), SAIYAN.TRANSFORMED_GODS[mc:GetCode()],
-    c:GetCode() == SAIYAN.TRANSFORMED_GODS[mc:GetCode()])
+
   -- local mustg = aux.GetMustBeMaterialGroup(tp, nil, tp, c, nil, REASON_FUSION)
   -- return c:IsType(TYPE_FUSION) and c:ListsCodeAsMaterial(mc:GetCode()) and
   --     c:IsCanBeSpecialSummoned(e, SUMMON_TYPE_FUSION, tp, false, false)
   --     and (#mustg == 0 or (#mustg == 1 and mustg:IsContains(mc)))
+  if c:GetCode() == SAIYAN.TRANSFORMED_GODS[mc:GetCode()] then
+    Debug.Message(c:IsCanBeSpecialSummoned(e, SUMMON_TYPE_SPECIAL, tp, false, false))
+  end
+
   return c:GetCode() == SAIYAN.TRANSFORMED_GODS[mc:GetCode()]
       and c:IsCanBeSpecialSummoned(e, SUMMON_TYPE_SPECIAL, tp, false, false)
 end
