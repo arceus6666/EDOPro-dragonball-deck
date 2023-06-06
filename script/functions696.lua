@@ -4,6 +4,35 @@ function Card.IsGod(c)
   return c.saiyan_god
 end
 
+RitualCopy = aux.FunctionWithNamedArgs(
+  function(c, _type, filter, lv, desc, extrafil, extraop, matfilter, stage2, location, forcedselection, customoperation,
+           specificmatfilter, requirementfunc, sumpos, extratg)
+    Debug.Message(c:GetCode(), lv)
+    --lv can be a function (like GetLevel/GetOriginalLevel), fixed level, if nil it defaults to GetLevel
+    if filter and type(filter) == "function" then
+      local mt = c.__index
+      if not mt.ritual_matching_function then
+        mt.ritual_matching_function = {}
+      end
+      mt.ritual_matching_function[c] = filter
+    end
+    local e1 = Effect.CreateEffect(c)
+    if desc then
+      e1:SetDescription(desc)
+    else
+      e1:SetDescription(1171)
+    end
+    e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
+    e1:SetType(EFFECT_TYPE_ACTIVATE)
+    e1:SetCode(EVENT_FREE_CHAIN)
+    e1:SetTarget(Ritual.Target(filter, _type, lv, extrafil, extraop, matfilter, stage2, location, forcedselection,
+      specificmatfilter, requirementfunc, sumpos, extratg))
+    e1:SetOperation(Ritual.Operation(filter, _type, lv, extrafil, extraop, matfilter, stage2, location, forcedselection,
+      customoperation, specificmatfilter, requirementfunc, sumpos))
+    return e1
+  end, "handler", "lvtype", "filter", "lv", "desc", "extrafil", "extraop", "matfilter", "stage2", "location",
+  "forcedselection", "customoperation", "specificmatfilter", "requirementfunc", "sumpos", "extratg")
+
 -- Fusion Dance --
 
 function Auxiliary.MetamoranLimit(e, se, sp, st)
