@@ -99,6 +99,15 @@ function s.initial_effect(c)
   })
   e1:SetCountLimit(1, id, EFFECT_COUNT_CODE_OATH)
   c:RegisterEffect(e1)
+  -- local e1 = Ritual.CreateProc({
+  --   handler = c,
+  --   lvtype = RITPROC_EQUAL,
+  --   location = LOCATION_DECK,
+  --   matfilter = s.mfilter,
+  --   stage2 = s.stage2
+  -- })
+  -- e1:SetCountLimit(1, id, EFFECT_COUNT_CODE_OATH)
+  -- c:RegisterEffect(e1)
 end
 
 function s.mfilter(c)
