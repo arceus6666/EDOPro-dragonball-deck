@@ -102,12 +102,17 @@ end
 
 s.listed_series = { 0x10a2 }
 function s.tgfilter(c, e, tp)
-  -- target monster
-  return c:IsFaceup() and c:IsSetCard(0x10a2) and c:IsCanBeFusionMaterial()
+  -- target monster to sacrifice
+  return c:IsFaceup()
+      -- and c:IsSetCard(0x10a2)
+      and c:IsCanBeSaiyanGod()
+      -- and c:IsCanBeFusionMaterial()
       and Duel.IsExistingMatchingCard(s.spfilter, tp, LOCATION_HAND, 0, 1, nil, e, tp, c)
 end
 
 function s.spfilter(c, e, tp, mc)
+  -- monster to summon
+
   -- local cc = Duel.GetLocationCount(tp, LOCATION_MZONE, tp)
   -- local ex = Duel.GetLocationCountFromEx(tp, tp, mc, c)
   -- Debug.Message("ex", ex, "-----", "cc", cc, "-----")
