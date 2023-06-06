@@ -102,7 +102,7 @@ end
 
 s.listed_series = { 0x10a2 }
 function s.tgfilter(c, e, tp)
-  Debug.Message("selected", c:GetCode())
+  -- Debug.Message("selected", c:GetCode())
   -- target monster to sacrifice
   return c:IsFaceup()
       -- and c:IsSetCard(0x10a2)
@@ -148,6 +148,7 @@ function s.activate(e, tp, eg, ep, ev, re, r, rp)
     Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_SPSUMMON)
     local sg = Duel.SelectMatchingCard(tp, s.spfilter, tp, LOCATION_HAND, 0, 1, 1, nil, e, tp, tc)
     local sc = sg:GetFirst()
+    Debug.Message("god selected", sc:GetCode())
     if sc then
       sc:SetMaterial(Group.FromCards(tc))
       Duel.SendtoGrave(tc, REASON_EFFECT + REASON_MATERIAL + REASON_FUSION)
