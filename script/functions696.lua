@@ -310,5 +310,3 @@ function Card.TransformSaiyanGod(c, base)
 end
 
 -- God Saiyan Summon --
-
-Debug.Message('const', SAIYAN.TRANSFORMED_GODS)
