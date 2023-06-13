@@ -4,8 +4,6 @@ Duel.LoadScript("functions696.lua")
 local s, id = GetID()
 
 function s.initial_effect(c)
-  
-Debug.Message('const', SAIYAN.TRANSFORMED_GODS)
   c:EnableReviveLimit()
   
   c:FusionDance(id, SAIYAN.XENO_VEGETA, SAIYAN.XENO_GOKU)
