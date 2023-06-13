@@ -146,7 +146,7 @@ end
 
 local function filtercon(c, tp, sc)
   return c:IsType(TYPE_NORMAL, sc, MATERIAL_FUSION, tp)
-      and c:GetEquipGroup():IsExists(aux.FilterBoolFunction(Card.IsCode, POTARA_EARING), 1, nil)
+      and c:GetEquipGroup():IsExists(aux.FilterBoolFunction(Card.IsCode, CARD_POTARA_EARING), 1, nil)
       and c:IsControler(tp) and Duel.GetLocationCountFromEx(tp, tp, c, sc) > 0
 end
 
