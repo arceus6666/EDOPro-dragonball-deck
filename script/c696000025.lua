@@ -1,4 +1,4 @@
--- test special
+-- xeno trunks god
 
 Duel.LoadScript("functions696.lua")
 local s, id = GetID()
