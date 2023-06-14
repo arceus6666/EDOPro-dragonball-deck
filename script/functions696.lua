@@ -305,19 +305,30 @@ function Card.TransformSaiyanGod(c, base)
     if not g then return end
 
     local atk = 0
+    local def = 0
     local iter = g:Iter()
     for gc in iter do
       atk = atk + gc:Attack()
+      def = def + gc:Defense()
       -- Debug.Message(gc)
     end
 
     Duel.Release(g, REASON_COST)
+
     local e1 = Effect.CreateEffect(e:GetHandler())
     e1:SetType(EFFECT_TYPE_SINGLE)
     e1:SetCode(EFFECT_UPDATE_ATTACK)
     e1:SetValue(atk)
     e1:SetReset(RESET_EVENT + RESETS_STANDARD_DISABLE - RESET_TOFIELD)
     e:GetHandler():RegisterEffect(e1)
+
+    local e2 = Effect.CreateEffect(e:GetHandler())
+    e2:SetType(EFFECT_TYPE_SINGLE)
+    e2:SetCode(EFFECT_UPDATE_DEFENSE)
+    e2:SetValue(def)
+    e2:SetReset(RESET_EVENT + RESETS_STANDARD_DISABLE - RESET_TOFIELD)
+    e:GetHandler():RegisterEffect(e2)
+
     g:DeleteGroup()
   end)
   c:RegisterEffect(e1)
