@@ -1,4 +1,4 @@
--- xeno gohan ssj
+-- xeno gohan ssj3
 
 Duel.LoadScript("functions696.lua")
 local s, id = GetID()
