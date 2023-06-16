@@ -1,4 +1,4 @@
--- test ritual spell
+-- saiyan god ritual
 
 Duel.LoadScript("functions696.lua")
 local s, id = GetID()
